@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec Review"
+  short_description: "Review code against normative docs and release criteria."
+  default_prompt: "Use this skill to review the current implementation against project specs, compliance docs, and release readiness criteria. Report findings first, then open questions, then summary."

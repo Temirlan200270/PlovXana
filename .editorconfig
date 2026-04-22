@@ -1,0 +1,38 @@
+# =============================================================================
+# Plovxana — EditorConfig
+# Единый стиль между IDE (VSCode, Cursor, WebStorm) и разными ОС.
+# https://editorconfig.org
+# =============================================================================
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+
+# Markdown: сохранять значимые пробелы в конце строк (hard-break)
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# Windows-скрипты — CRLF
+[*.{ps1,bat,cmd}]
+end_of_line = crlf
+
+# Makefile требует табы
+[{Makefile,makefile,*.mk}]
+indent_style = tab
+
+# SQL-миграции — максимум читаемости
+[*.sql]
+indent_size = 2
+max_line_length = off
+
+# JSON и YAML
+[*.{json,yml,yaml}]
+indent_size = 2

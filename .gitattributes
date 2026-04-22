@@ -1,0 +1,74 @@
+# =============================================================================
+# Plovxana — .gitattributes
+# Нормализация переводов строк и корректное определение бинарных файлов.
+# Важно, потому что основная разработка идёт на Windows, а прод — Linux VPS.
+# =============================================================================
+
+# --- Автонормализация ----------------------------------------------------------
+# Git сам решит, текст это или бинарь; текст будет хранить как LF.
+* text=auto eol=lf
+
+# --- Явно текстовые (LF) -------------------------------------------------------
+*.ts       text eol=lf
+*.tsx      text eol=lf
+*.js       text eol=lf
+*.jsx      text eol=lf
+*.mjs      text eol=lf
+*.cjs      text eol=lf
+*.json     text eol=lf
+*.md       text eol=lf
+*.mdx      text eol=lf
+*.html     text eol=lf
+*.css      text eol=lf
+*.scss     text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.toml     text eol=lf
+*.xml      text eol=lf
+*.svg      text eol=lf
+*.sql      text eol=lf
+*.sh       text eol=lf
+*.env      text eol=lf
+
+# --- Windows-скрипты (CRLF, иначе PowerShell и cmd ломаются) ------------------
+*.ps1      text eol=crlf
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+
+# --- Бинарные (не трогать) -----------------------------------------------------
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.webp     binary
+*.avif     binary
+*.ico      binary
+*.pdf      binary
+*.woff     binary
+*.woff2    binary
+*.ttf      binary
+*.otf      binary
+*.eot      binary
+*.mp3      binary
+*.mp4      binary
+*.mov      binary
+*.webm     binary
+*.zip      binary
+*.gz       binary
+*.tar      binary
+*.7z       binary
+*.rar      binary
+
+# --- Lockfile — diff не отображать в PR ---------------------------------------
+package-lock.json -diff
+yarn.lock         -diff
+pnpm-lock.yaml    -diff
+
+# --- Экспорт через `git archive` — что не должно попадать в архив -------------
+.gitattributes     export-ignore
+.gitignore         export-ignore
+.github/           export-ignore
+docs/              export-ignore
+newdocs/           export-ignore
+tests/             export-ignore
+photo/             export-ignore
