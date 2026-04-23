@@ -4,7 +4,8 @@ import { formatMoneyRu } from "@/lib/format/money";
 
 export type DishCardProps = {
   name: string;
-  subtitle: string;
+  /** Подзаголовок (ингредиенты caps). Null — если у позиции нет описания в БД. */
+  subtitle: string | null;
   price: number;
   imageUrl: string | null;
   currency: string;
@@ -48,7 +49,7 @@ export function DishCard({
             )}
           </div>
           <h3 className="t-h3 mb-2">{name}</h3>
-          <p className="t-micro mb-4">{subtitle}</p>
+          {subtitle ? <p className="t-micro mb-4">{subtitle}</p> : null}
           <hr className="mb-4 h-px w-20 border-0 bg-gold-500/40" />
           <p className="font-serif text-2xl text-gold-500">
             {formatMoneyRu(price, currency)}

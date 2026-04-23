@@ -88,7 +88,7 @@ export function MenuClient({
           <div>
             <p className="t-caps">МЕНЮ</p>
             <h1 className="mt-3 t-h1">
-              Кухня <ItalicAccent>{tenantName}</ItalicAccent>
+              Меню <ItalicAccent>{tenantName}</ItalicAccent>
             </h1>
           </div>
 

@@ -43,14 +43,25 @@ export async function getTenantSlugFromHost(): Promise<string | null> {
 }
 
 /**
+ * Бренд-имя для витрины. БД бота обслуживает сразу несколько заведений,
+ * и `organizations.name` там хранит внутреннее имя проекта (например, «RestoMind»),
+ * которое не должно попадать в UI/SEO нашего сайта.
+ * Переопределение — через env `NEXT_PUBLIC_BRAND_NAME` с безопасным fallback.
+ */
+const BRAND_NAME_OVERRIDE = (
+  process.env.NEXT_PUBLIC_BRAND_NAME ?? "Plovxana"
+).trim();
+
+/**
  * Маппит строку `organizations` из БД бота в TenantRow для UI.
  * `id` приводится к строке, `currency` — fallback "KZT".
+ * `name` принудительно заменяется на бренд сайта — см. BRAND_NAME_OVERRIDE.
  */
 function mapOrganizationRow(row: Record<string, unknown>): unknown {
   return {
     id: row.id,
     slug: row.slug,
-    name: row.name,
+    name: BRAND_NAME_OVERRIDE,
     logo_url: null,
     contact_phone: null,
     contact_email: null,

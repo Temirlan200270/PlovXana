@@ -17,6 +17,45 @@ export type GetMenuResult = {
 const FALLBACK_CATEGORY_NAME = "Меню";
 
 /**
+ * Приоритетные категории для вкладок меню.
+ * Чем меньше индекс — тем раньше вкладка. Сравнение — по подстроке (lowercase).
+ * Категории, которых нет в списке, идут в порядке появления,
+ * а «акция/скидка/спецпредложение» уходят в самый конец.
+ */
+const CATEGORY_PRIORITY: readonly string[] = [
+  "плов",
+  "горячее",
+  "основн",
+  "шашлык",
+  "закуск",
+  "салат",
+  "суп",
+  "выпечк",
+  "гарнир",
+  "десерт",
+  "напит",
+  "детск",
+];
+
+const CATEGORY_DEPRIORITY: readonly string[] = [
+  "акци",
+  "скидк",
+  "спецпредлож",
+  "стоп",
+];
+
+function categoryRank(name: string): number {
+  const lc = name.toLowerCase();
+  for (let i = 0; i < CATEGORY_PRIORITY.length; i++) {
+    if (lc.includes(CATEGORY_PRIORITY[i])) return i;
+  }
+  for (const kw of CATEGORY_DEPRIORITY) {
+    if (lc.includes(kw)) return 1000;
+  }
+  return 500;
+}
+
+/**
  * Стабильный slug категории на основе её имени — нужен только для UI (key, tab id).
  */
 function buildCategoryId(name: string): string {
@@ -47,6 +86,9 @@ async function getMenuUncached(tenantId: string): Promise<GetMenuResult> {
     )
     .eq("organization_id", orgId)
     .eq("is_available", true)
+    // Исключаем позиции без цены (тестовые строки бота и инвентарные записи),
+    // они приходят как price = 0 и ломают витрину.
+    .gt("price", 0)
     .order("category", { ascending: true })
     .order("name", { ascending: true });
 
@@ -74,8 +116,19 @@ async function getMenuUncached(tenantId: string): Promise<GetMenuResult> {
     grouped.get(catName)!.push(item);
   }
 
+  /**
+   * Сортируем имена категорий по приоритету бренда:
+   *   - плов/горячее/основные вперёд;
+   *   - «акция/скидка/стоп» в самый конец.
+   * Внутри одной группы — исходный порядок появления (стабильная сортировка).
+   */
+  const sortedOrder = order
+    .map((name, idx) => ({ name, idx, rank: categoryRank(name) }))
+    .sort((a, b) => (a.rank === b.rank ? a.idx - b.idx : a.rank - b.rank))
+    .map((x) => x.name);
+
   const menu: MenuCategoryWithItems[] = [];
-  order.forEach((catName, idx) => {
+  sortedOrder.forEach((catName, idx) => {
     const catItems = grouped.get(catName) ?? [];
     const normalized = {
       id: buildCategoryId(catName),

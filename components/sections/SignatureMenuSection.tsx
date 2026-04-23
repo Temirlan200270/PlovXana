@@ -12,10 +12,15 @@ function pickSignatureItems(menu: MenuCategoryWithItems[]): MenuCategoryWithItem
   return picked;
 }
 
-function buildSubtitle(item: { description: string | null }): string {
+/**
+ * Подзаголовок карточки блюда. Если в БД бота нет описания — возвращаем null,
+ * чтобы карточка не показывала фейковые ингредиенты (раньше хардкодилось
+ * «БАРАНИНА · АЙВА · ЗИРА», что врало на 100% позиций без состава).
+ * Когда поле description появится — рендерим его в верхнем регистре, до 60 симв.
+ */
+function buildSubtitle(item: { description: string | null }): string | null {
   const base = (item.description ?? "").trim();
-  if (!base) return "БАРАНИНА · АЙВА · ЗИРА";
-  // Simplified placeholder; we will later map attributes -> caps ingredients.
+  if (!base) return null;
   const normalized = base.replace(/\s+/g, " ").slice(0, 60);
   return normalized.toUpperCase();
 }
