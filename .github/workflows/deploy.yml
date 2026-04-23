@@ -32,8 +32,10 @@ jobs:
           VPS_USER: ${{ secrets.VPS_USER }}
           VPS_PATH: ${{ secrets.VPS_PATH }}
         run: |
+          # 1) Pull latest deploy.sh from remote so we execute the NEW version, not a cached one
+          # 2) Then run it
           ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$VPS_USER@$VPS_HOST" \
-            "cd $VPS_PATH && bash deploy/deploy.sh"
+            "cd $VPS_PATH && git fetch --prune origin && git reset --hard origin/main && bash deploy/deploy.sh"
 
       - name: Health check
         env:
