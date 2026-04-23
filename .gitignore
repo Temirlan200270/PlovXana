@@ -117,3 +117,7 @@ credentials/
 # --- Personal / local notes (never commit) -----------------------------------
 VPS_ACCESS.md
 NOTES.local.md
+
+# --- Personal VPS bootstrap scripts (contain embedded private SSH key) ------
+setup-vps-access.ps1
+setup-vps-access.bat
