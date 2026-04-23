@@ -19,7 +19,7 @@ export function HeroSection({
   return (
     <Section
       texture="ikat"
-      bokehImage="/photo/hero-dombra.jpg"
+      bokehImage="/photo/hero-dombra.webp"
       bokehBlurPx={a.bokeh.blur}
       bokehOverlayAlpha={a.bokeh.overlayAlpha}
       bokehSaturate={a.bokeh.saturate}

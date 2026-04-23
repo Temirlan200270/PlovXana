@@ -34,7 +34,7 @@ function getPilotTenant(): TenantPublicConfig {
       { value: "37", label: "БЛЮД В МЕНЮ" },
       { value: "1924", label: "ГОД РЕЦЕПТА" },
     ],
-    aboutPhotoUrl: "/photo/atmosphere-warm.jpg",
+    aboutPhotoUrl: "/photo/atmosphere-warm.webp",
 
     signatureEyebrow: "02 — ФИРМЕННЫЕ БЛЮДА",
     signatureTitleLine1: "Вкус, высеченный",

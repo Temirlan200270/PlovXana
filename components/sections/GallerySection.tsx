@@ -9,7 +9,7 @@ export function GallerySection({ copy }: { copy: TenantPublicConfig }) {
 
   return (
     <Section
-      bokehImage="/photo/atmosphere-warm.jpg"
+      bokehImage="/photo/atmosphere-warm.webp"
       bokehBlurPx={a.bokeh.blur}
       bokehOverlayAlpha={a.bokeh.overlayAlpha}
       texture="brick"

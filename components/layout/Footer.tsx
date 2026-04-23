@@ -13,7 +13,7 @@ export function Footer({ copy }: { copy: TenantPublicConfig }) {
       className="relative overflow-hidden border-t border-gold-500/20 bg-umber-950"
     >
       <div
-        className="absolute inset-0 pointer-events-none bg-[url('/photo/texture-brick.jpg')] bg-repeat"
+        className="absolute inset-0 pointer-events-none bg-[url('/photo/texture-brick.webp')] bg-repeat"
         style={{ opacity: 0.6, mixBlendMode: "normal" }}
         aria-hidden
       />

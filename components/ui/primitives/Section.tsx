@@ -13,10 +13,10 @@ type Texture = "brick" | "ikat" | "wood" | "pergament" | "none";
  * Файлы должны лежать в `/public/photo` (см. `newdocs/atmosphere_config.md §1.1`).
  */
 const textureUrl: Record<Exclude<Texture, "none">, string> = {
-  brick: "/photo/texture-brick.jpg",
-  ikat: "/photo/texture-ikat.jpg",
-  wood: "/photo/texture-ikat.jpg",
-  pergament: "/photo/texture-ikat.jpg",
+  brick: "/photo/texture-brick.webp",
+  ikat: "/photo/texture-ikat.webp",
+  wood: "/photo/texture-ikat.webp",
+  pergament: "/photo/texture-ikat.webp",
 };
 
 /**

@@ -10,7 +10,7 @@ export function GalleryTile({
   return (
     <div className="relative aspect-[3/4] overflow-hidden bg-umber-900 group">
       <div
-        className="absolute inset-0 pointer-events-none bg-[url('/photo/texture-ikat.jpg')] bg-repeat opacity-40 mix-blend-overlay"
+        className="absolute inset-0 pointer-events-none bg-[url('/photo/texture-ikat.webp')] bg-repeat opacity-40 mix-blend-overlay"
         aria-hidden
       />
       <div className="absolute inset-2.5 ring-[0.5px] ring-gold-500/50" aria-hidden />

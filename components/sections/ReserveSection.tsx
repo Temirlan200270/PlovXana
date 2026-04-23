@@ -78,7 +78,7 @@ export function ReserveSection({ copy }: { copy: TenantPublicConfig }) {
 
   return (
     <Section
-      bokehImage="/photo/hero-dombra.jpg"
+      bokehImage="/photo/hero-dombra.webp"
       bokehBlurPx={a.bokeh.blur}
       bokehOverlayAlpha={a.bokeh.overlayAlpha}
       texture="pergament"

@@ -28,7 +28,7 @@ export function MenuCard({ item, currency, orderHref }: MenuCardProps) {
     <article className="group transition-all duration-600 ease-heritage hover:-translate-y-0.5 hover:shadow-lift-lg">
       <CardFrame className="relative overflow-hidden">
         <div
-          className="absolute inset-0 pointer-events-none bg-[url('/photo/texture-brick.jpg')] bg-repeat opacity-25 mix-blend-overlay"
+          className="absolute inset-0 pointer-events-none bg-[url('/photo/texture-brick.webp')] bg-repeat opacity-25 mix-blend-overlay"
           aria-hidden
         />
 
