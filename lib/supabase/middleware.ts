@@ -17,7 +17,10 @@ function extractTenantSlugFromHost(host: string): string | null {
 
 /**
  * Инжект `x-tenant-slug` для публичного сайта.
- * Источник: поддомен или первый сегмент пути.
+ * Источник — только поддомен (`plovxana.example.com`).
+ * Path-based детект отключён умышленно: пути вида `/privacy`, `/menu`, `/api`
+ * иначе ошибочно распознаются как slug тенанта (false positive).
+ * Маршрут `/[slug]/menu` берёт slug напрямую из `params` страницы.
  */
 export function buildTenantRequestHeaders(request: NextRequest): Headers {
   const headers = new Headers(request.headers);
@@ -29,20 +32,6 @@ export function buildTenantRequestHeaders(request: NextRequest): Headers {
   const hostSlug = extractTenantSlugFromHost(host);
   if (hostSlug) {
     headers.set("x-tenant-slug", hostSlug);
-    return headers;
-  }
-
-  const pathname = request.nextUrl.pathname;
-  if (
-    !pathname.startsWith("/api/") &&
-    !pathname.startsWith("/_next") &&
-    pathname !== "/favicon.ico"
-  ) {
-    const pathMatch = pathname.match(/^\/([a-z0-9-]{2,})(?:\/|$)/);
-    const pathSlug = pathMatch?.[1];
-    if (pathSlug) {
-      headers.set("x-tenant-slug", pathSlug);
-    }
   }
 
   return headers;
