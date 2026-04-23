@@ -31,10 +31,15 @@ export async function getTenantSlugFromHost(): Promise<string | null> {
   const parts = host.split(".");
   const first = parts[0]?.toLowerCase();
   if (!first || first === "www") return null;
-  if (first === "localhost" || first === "127") return null;
+  if (first === "localhost") return null;
   if (parts.length < 2) return null;
 
-  return first;
+  if (parts.length === 4 && parts.every((p) => /^\d{1,3}$/.test(p))) {
+    return null;
+  }
+  if (/^\d+$/.test(first)) return null;
+
+  return isTenantSlug(first) ? first : null;
 }
 
 /**
