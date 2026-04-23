@@ -9,8 +9,14 @@ function extractTenantSlugFromHost(host: string): string | null {
   const parts = cleaned.split(".");
   const first = parts[0];
   if (!first || first === "www") return null;
-  if (first === "localhost" || first === "127") return null;
+  if (first === "localhost") return null;
   if (parts.length < 2) return null;
+
+  if (parts.length === 4 && parts.every((p) => /^\d{1,3}$/.test(p))) {
+    return null;
+  }
+
+  if (/^\d+$/.test(first)) return null;
 
   return TENANT_SLUG_RE.test(first) ? first : null;
 }
