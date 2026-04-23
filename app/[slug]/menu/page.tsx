@@ -16,7 +16,7 @@ import type { Metadata } from "next";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
-/** ISR: меню может меняться без деплоя (интервал подберите под нагрузку). */
+/** ISR: меню обновляется без деплоя. */
 export const revalidate = 30;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -37,8 +37,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 /**
- * Меню (Heritage Edition): Server Component → getTenant + getMenu → MenuClient,
- * обёрнутый в Section с brick-текстурой и film-grain. TopNav/Footer/CartDrawer — в layout.
+ * Меню тенанта: SSR → getTenant + getMenu → MenuClient.
+ * Заказ оформляется в боте; локальной корзины нет.
  */
 export default async function MenuPage({ params }: PageProps) {
   const { slug } = await params;
@@ -85,6 +85,7 @@ export default async function MenuPage({ params }: PageProps) {
 
   const a = atmosphere.menu;
   const menuHref = `/${slug}/menu`;
+  const orderHref = process.env.NEXT_PUBLIC_ORDER_URL?.trim() || null;
 
   return (
     <>
@@ -111,6 +112,7 @@ export default async function MenuPage({ params }: PageProps) {
             currency={currency}
             loadError={menuResult.error}
             showDevHint={!configured}
+            orderHref={orderHref}
           />
         </Section>
       </main>

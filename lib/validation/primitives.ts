@@ -5,10 +5,14 @@ import { z } from "zod";
  * Единая точка правды для UUID, телефона и slug в валидации на границе.
  */
 
-/** UUID (строковый идентификатор сущностей БД / API). */
-export const IdSchema = z.string().uuid({
-  message: "Некорректный идентификатор (ожидается UUID).",
-});
+/**
+ * Идентификатор сущности — строка (string).
+ * Источник истины — БД бота (PostgreSQL serial integer), приводится к строке
+ * на границе чтения, чтобы UI не зависел от типа БД.
+ */
+export const IdSchema = z
+  .union([z.string().min(1), z.number().int().nonnegative()])
+  .transform((v) => String(v));
 
 /**
  * E.164-подобный номер: опциональный «+», затем 1–15 цифр, без пробелов.

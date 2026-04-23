@@ -1,13 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { useCart } from "@/store/useCart";
 import { Button } from "@/components/ui/primitives/Button";
 import { CardFrame } from "@/components/ui/primitives/CardFrame";
 import { PlateIcon } from "@/components/ornaments/PlateIcon";
-import { ItemModifierModal } from "@/components/menu/ItemModifierModal";
-import { moneyToIntTenge } from "@/lib/domain/order-money";
 import { formatMoneyRu } from "@/lib/format/money";
 import type { MenuCategoryWithItems } from "@/lib/validation/menu";
 
@@ -16,18 +12,16 @@ export type MenuCardItem = MenuCategoryWithItems["items"][number];
 type MenuCardProps = {
   item: MenuCardItem;
   currency: string;
-  tenantId: string;
+  /** Если задан — кнопка превращается в ссылку «Заказать в Telegram». Иначе — просто заголовок. */
+  orderHref: string | null;
 };
 
 /**
- * Heritage DishCard: umber-900 фон, двойной gold ring (CardFrame),
+ * Heritage DishCard для витрины: umber-900 фон, gold ring (CardFrame),
  * subtitle caps из description, ₸-формат, бейдж «Авторское» для is_popular.
- * Логика добавления в корзину сохранена; модификаторы — через ItemModifierModal.
+ * Заказ оформляется в боте, локальной корзины нет.
  */
-export function MenuCard({ item, currency, tenantId }: MenuCardProps) {
-  const addItem = useCart((s) => s.addItem);
-  const [modifierOpen, setModifierOpen] = useState(false);
-  const hasModifiers = (item.modifier_groups?.length ?? 0) > 0;
+export function MenuCard({ item, currency, orderHref }: MenuCardProps) {
   const subtitle = buildIngredientsCaps(item.description);
 
   return (
@@ -69,47 +63,27 @@ export function MenuCard({ item, currency, tenantId }: MenuCardProps) {
             {formatMoneyRu(item.price, currency)}
           </p>
 
-          <div className="mt-6 w-full">
-            <Button
-              variant="secondary"
-              size="sm"
-              className="w-full"
-              onClick={() => {
-                if (hasModifiers) {
-                  setModifierOpen(true);
-                  return;
-                }
-                addItem(tenantId, {
-                  id: `menu:${item.id}`,
-                  menu_item_id: item.id,
-                  name: item.name,
-                  price: moneyToIntTenge(Number(item.price)),
-                  quantity: 1,
-                  modifier_ids: [],
-                  image_url: item.image_url ?? undefined,
-                });
-              }}
-            >
-              {hasModifiers ? "Выбрать опции" : "В корзину"}
-            </Button>
-          </div>
+          {orderHref ? (
+            <div className="mt-6 w-full">
+              <Button
+                href={orderHref}
+                variant="secondary"
+                size="sm"
+                className="w-full"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Заказать в Telegram
+              </Button>
+            </div>
+          ) : null}
         </div>
       </CardFrame>
-
-      {hasModifiers ? (
-        <ItemModifierModal
-          open={modifierOpen}
-          onClose={() => setModifierOpen(false)}
-          item={item}
-          currency={currency}
-          tenantId={tenantId}
-        />
-      ) : null}
     </article>
   );
 }
 
-/** Ингредиенты caps. Без описания — пустая строка, чтобы не плодить bullshit. */
+/** Описание → caps-строка ингредиентов. Пусто — пусто. */
 function buildIngredientsCaps(description: string | null): string {
   const base = (description ?? "").trim();
   if (!base) return "";

@@ -1,1 +1,6 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/(public)/page": "app/(public)/page.js",
+  "/(public)/privacy/page": "app/(public)/privacy/page.js",
+  "/[slug]/menu/page": "app/[slug]/menu/page.js"
+}

@@ -2,13 +2,12 @@ import type { TenantRow } from "@/lib/validation/menu";
 import { BRAND_NAME } from "@/lib/branding";
 
 /**
- * Стабильный UUID для пилота в локальной разработке без БД.
- * В проде при сидировании Supabase используйте тот же id или обновите строку tenants.
+ * Локальный fallback-id (используется только в dev без Supabase).
+ * В проде сайт всегда читает organization из БД бота по slug.
  */
-export const PILOT_TENANT_LOCAL_ID =
-  "a0000000-0000-4000-8000-000000000001";
+export const PILOT_TENANT_LOCAL_ID = "0";
 
-/** Fallback-строка tenants, когда Supabase выключен или таблица ещё пуста. */
+/** Fallback-строка organization, когда Supabase выключен (только dev). */
 export const PILOT_TENANT_ROW: TenantRow = {
   id: PILOT_TENANT_LOCAL_ID,
   slug: "plovxana",

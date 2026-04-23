@@ -1,9 +1,7 @@
 import { headers } from "next/headers";
 import { PHASE_PRODUCTION_BUILD } from "next/constants";
-import {
-  createSupabaseServerClient,
-  isSupabaseConfigured,
-} from "@/lib/supabase/server";
+import { createSupabaseAnonServerClient } from "@/lib/supabase/anon-server";
+import { isSupabaseConfigured } from "@/lib/supabase/server";
 import { PILOT_TENANT_ROW } from "@/lib/tenant/pilotTenant";
 import { TenantRowSchema, type TenantRow } from "@/lib/validation/menu";
 
@@ -12,7 +10,8 @@ function isTenantSlug(value: string): boolean {
 }
 
 /**
- * Тенант из Edge middleware header (x-tenant-slug). Это основной путь для host-based tenancy.
+ * Тенант из Edge middleware header (`x-tenant-slug`).
+ * Основной путь для host-based / path-based tenancy.
  */
 export async function getTenantSlugFromHeader(): Promise<string | null> {
   const h = await headers();
@@ -21,49 +20,65 @@ export async function getTenantSlugFromHeader(): Promise<string | null> {
 }
 
 /**
- * Резолв slug по поддомену: plovxana.localhost → plovxana.
- * Для localhost / Vercel preview без поддомена — вернёт null (используйте slug из URL).
+ * Резолв slug по поддомену: plovxana.example.com → plovxana.
+ * Для localhost / Vercel preview без поддомена — null.
  */
 export async function getTenantSlugFromHost(): Promise<string | null> {
   const h = await headers();
-  const host = (h.get("x-forwarded-host") ?? h.get("host") ?? "").split(
-    ":",
-  )[0];
+  const host = (h.get("x-forwarded-host") ?? h.get("host") ?? "").split(":")[0];
   if (!host) return null;
 
   const parts = host.split(".");
   const first = parts[0]?.toLowerCase();
   if (!first || first === "www") return null;
   if (first === "localhost" || first === "127") return null;
-  /* vercel.app: проект.vercel.app — один сегмент «проект», не тенант */
   if (parts.length < 2) return null;
 
   return first;
 }
 
 /**
- * Тенант из Supabase по slug (основной путь для маршрута /[slug]/...).
+ * Маппит строку `organizations` из БД бота в TenantRow для UI.
+ * `id` приводится к строке, `currency` — fallback "KZT".
+ */
+function mapOrganizationRow(row: Record<string, unknown>): unknown {
+  return {
+    id: row.id,
+    slug: row.slug,
+    name: row.name,
+    logo_url: null,
+    contact_phone: null,
+    contact_email: null,
+    address: null,
+    currency: row.currency ?? "KZT",
+    theme: null,
+    is_active: true,
+    home_config: null,
+    telegram_chat_id: row.telegram_ops_chat_id ?? null,
+  };
+}
+
+/**
+ * Тенант (organization) по slug — основной путь для маршрутов сайта.
+ * Только чтение; пишет в БД исключительно бот.
  */
 export async function getTenantBySlug(slug: string): Promise<TenantRow | null> {
   if (!isSupabaseConfigured()) return null;
 
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabaseAnonServerClient();
   const { data, error } = await supabase
-    .from("tenants")
-    .select(
-      "id, slug, name, logo_url, contact_phone, contact_email, address, currency, theme, is_active, home_config",
-    )
+    .from("organizations")
+    .select("id, slug, name, currency, telegram_ops_chat_id")
     .eq("slug", slug)
-    .eq("is_active", true)
     .maybeSingle();
 
   if (error) {
-    console.error("[getTenantBySlug]", error.message);
+    console.error("[getTenantBySlug] organizations error:", error.message);
     return null;
   }
   if (!data) return null;
 
-  const parsed = TenantRowSchema.safeParse(data);
+  const parsed = TenantRowSchema.safeParse(mapOrganizationRow(data));
   if (!parsed.success) {
     console.error("[getTenantBySlug] Zod", parsed.error.flatten());
     return null;
@@ -83,13 +98,13 @@ export async function getTenantFromHostOrDefault(): Promise<TenantRow | null> {
 }
 
 /**
- * Тенант для главной `/`: поддомен или дефолтный slug → Supabase; иначе пилотный fallback.
- * Не бросает: при пустой БД вернёт PILOT_TENANT_ROW (с предупреждением в лог).
+ * Тенант для главной `/`:
+ *   - есть Supabase + строка в `organizations` → реальные данные;
+ *   - нет Supabase → пилотный fallback (только в dev / на этапе build);
+ *   - в проде без строки бросаем (fail-closed), чтобы не показывать кривое.
  */
 export async function getTenant(): Promise<TenantRow> {
   if (!isSupabaseConfigured()) {
-    // Во время `next build` (пререндер) нельзя падать из-за отсутствующих runtime env.
-    // Fail-closed остаётся для реального прод-рантайма.
     if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
       return PILOT_TENANT_ROW;
     }
@@ -106,15 +121,14 @@ export async function getTenant(): Promise<TenantRow> {
     return row;
   }
 
-  // В проде fallback запрещён: если Supabase настроен, ожидаем, что tenants сидированы.
   if (process.env.NODE_ENV === "production") {
     throw new Error(
-      "Tenant runtime: активный тенант не найден (в production fallback запрещён).",
+      "Tenant runtime: organization не найдена. Проверьте, что в public.organizations есть строка с нужным slug.",
     );
   }
 
   console.warn(
-    "[getTenant] Активный тенант в БД не найден — используется пилотный fallback (dev only).",
+    "[getTenant] organization не найдена в БД — используется пилотный fallback (dev only).",
   );
   return PILOT_TENANT_ROW;
 }

@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AlertCircle, RefreshCw } from "lucide-react";
 import { MenuCard, type MenuCardItem } from "@/components/menu/MenuCard";
 import { Button } from "@/components/ui/primitives/Button";
 import { ItalicAccent } from "@/components/ui/primitives/ItalicAccent";
 import { cn } from "@/lib/utils/cn";
-import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import type { MenuCategoryWithItems } from "@/lib/validation/menu";
-import { useCart } from "@/store/useCart";
 
 export type MenuClientProps = {
   initialMenu: MenuCategoryWithItems[];
@@ -19,8 +17,14 @@ export type MenuClientProps = {
   currency: string;
   loadError: string | null;
   showDevHint: boolean;
+  /** Куда ведёт кнопка «Заказать» (Telegram-бот / WhatsApp / tel:). Опционально. */
+  orderHref?: string | null;
 };
 
+/**
+ * Витринный клиент меню: вкладки категорий + карточки.
+ * Заказ оформляется в боте (см. orderHref); локальной корзины больше нет.
+ */
 export function MenuClient({
   initialMenu,
   tenantId,
@@ -29,44 +33,16 @@ export function MenuClient({
   currency,
   loadError,
   showDevHint,
+  orderHref,
 }: MenuClientProps) {
   const router = useRouter();
   const firstCategoryId = initialMenu[0]?.id ?? "";
   const [activeCategoryId, setActiveCategoryId] = useState(firstCategoryId);
 
-  useEffect(() => {
-    if (showDevHint || !tenantId) return;
-
-    const supabase = createSupabaseBrowserClient();
-    const channel = supabase
-      .channel(`public-menu-items-${tenantId}`)
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "menu_items",
-          filter: `tenant_id=eq.${tenantId}`,
-        },
-        () => {
-          router.refresh();
-        },
-      )
-      .subscribe();
-
-    return () => {
-      void supabase.removeChannel(channel);
-    };
-  }, [tenantId, showDevHint, router]);
-
-  const setOpen = useCart((s) => s.setOpen);
-  const totalItems = useCart((s) => s.totalItems);
-
   const activeItems: MenuCardItem[] = useMemo(() => {
     const cat = initialMenu.find((c) => c.id === activeCategoryId);
     return cat?.items ?? [];
   }, [activeCategoryId, initialMenu]);
-  const cartCount = totalItems();
   const tabPanelId = "menu-tabpanel";
 
   return (
@@ -75,7 +51,7 @@ export function MenuClient({
         <div className="mb-8 ring-1 ring-ember-600/40 bg-umber-900/40 px-5 py-4">
           <p className="t-micro mb-2">DEV · ПИЛОТНЫЙ КОНТЕНТ</p>
           <p className="t-body text-cream-100/80">
-            Supabase не настроен. tenantId для корзины:{" "}
+            Supabase не настроен. tenantId:{" "}
             <code className="text-cream-100">
               {tenantId || tenantSlug || "—"}
             </code>
@@ -89,10 +65,7 @@ export function MenuClient({
           role="alert"
         >
           <div className="flex gap-4">
-            <AlertCircle
-              className="h-6 w-6 shrink-0 text-ember-500"
-              aria-hidden
-            />
+            <AlertCircle className="h-6 w-6 shrink-0 text-ember-500" aria-hidden />
             <div className="min-w-0 flex-1 space-y-3">
               <p className="t-h3">Меню сегодня недоступно</p>
               <p className="t-body text-cream-100/80">{loadError}</p>
@@ -119,14 +92,17 @@ export function MenuClient({
             </h1>
           </div>
 
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => setOpen(true)}
-            aria-label="Открыть корзину"
-          >
-            Корзина{cartCount > 0 ? ` · ${cartCount}` : ""}
-          </Button>
+          {orderHref ? (
+            <Button
+              href={orderHref}
+              variant="secondary"
+              size="sm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Заказать в Telegram
+            </Button>
+          ) : null}
         </div>
         <p className="mt-4 t-body text-cream-100/70">
           Свежая подача, актуальные цены — без скрытых наценок.
@@ -184,7 +160,7 @@ export function MenuClient({
                 key={item.id}
                 item={item}
                 currency={currency}
-                tenantId={tenantId || (tenantSlug ?? "plovxana")}
+                orderHref={orderHref ?? null}
               />
             ))}
           </div>

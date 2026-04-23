@@ -1,6 +1,6 @@
 /**
  * Пустая строка, пробелы и плейсхолдеры вроде `https://` без хоста не считаются конфигом.
- * Иначе middleware падает с «Invalid supabaseUrl» при `createServerClient`.
+ * Без этого Edge middleware падал бы с «Invalid supabaseUrl» при `createClient`.
  */
 function isValidHttpUrl(value: string): boolean {
   try {
@@ -11,16 +11,9 @@ function isValidHttpUrl(value: string): boolean {
   }
 }
 
-/** Общая проверка env для Supabase (Edge middleware и Node server). */
+/** Проверка env для Supabase (anon-only — сайт ничего не пишет). */
 export function isSupabaseConfigured(): boolean {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() ?? "";
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() ?? "";
   return Boolean(url && key && isValidHttpUrl(url));
-}
-
-/** Service role только на сервере — для доверенных записей (гостевой заказ после валидации). */
-export function isSupabaseAdminConfigured(): boolean {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() ?? "";
-  const role = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() ?? "";
-  return Boolean(url && role && isValidHttpUrl(url));
 }
