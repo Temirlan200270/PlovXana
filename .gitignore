@@ -113,3 +113,7 @@ $RECYCLE.BIN/
 *.pfx
 secrets/
 credentials/
+
+# --- Personal / local notes (never commit) -----------------------------------
+VPS_ACCESS.md
+NOTES.local.md
