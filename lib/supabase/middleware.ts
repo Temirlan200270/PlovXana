@@ -6,6 +6,12 @@ function extractTenantSlugFromHost(host: string): string | null {
   const cleaned = host.split(":")[0]?.toLowerCase() ?? "";
   if (!cleaned) return null;
 
+  // Apex-домены витрины не несут tenant в поддомене.
+  // Для них используем NEXT_PUBLIC_DEFAULT_TENANT_SLUG (см. lib/tenant/getTenant.ts).
+  if (cleaned === "plovxanapvl.com" || cleaned === "www.plovxanapvl.com") {
+    return null;
+  }
+
   const parts = cleaned.split(".");
   const first = parts[0];
   if (!first || first === "www") return null;
