@@ -47,11 +47,13 @@ systemctl is-active pm2-deploy 2>/dev/null || echo "warning: pm2-deploy not acti
 
 echo
 echo "============================================================"
-echo "  COPY THE PRIVATE KEY BELOW INTO GitHub Secret VPS_SSH_KEY"
-echo "  (everything between BEGIN and END lines, inclusive)"
+echo "  COPY THE BASE64 STRING BELOW INTO GitHub Secret VPS_SSH_KEY"
+echo "  (one long line, no newlines, no quotes, nothing extra)"
+echo "  The workflow runs: echo \"\$VPS_SSH_KEY\" | base64 -d"
 echo "============================================================"
 echo
-cat "$KEY"
+base64 -w0 "$KEY"
+echo
 echo
 echo "============================================================"
 echo "  Other secrets to add in GitHub:"
