@@ -7,6 +7,7 @@ Purpose: минимальные шаги выката и проверки гос
 Связано с: [testing-strategy.md](testing-strategy.md), [security-spec.md](security-spec.md), [change-checklist.md](change-checklist.md).
 
 Локально без Supabase: [README.md](../README.md) (раздел «Локальный запуск»).
+Домен + HTTPS на VPS: [domain-setup.md](domain-setup.md).
 
 ---
 
