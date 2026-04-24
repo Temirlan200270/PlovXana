@@ -38,14 +38,12 @@ jobs:
             "cd $VPS_PATH && git fetch --prune origin && git reset --hard origin/main && bash deploy/deploy.sh"
 
       - name: Health check
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
         run: |
           for i in 1 2 3 4 5; do
-            code=$(curl -s -o /dev/null -w '%{http_code}' "http://$VPS_HOST/default/menu" || echo 000)
-            echo "attempt $i: HTTP $code"
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://plovxanapvl.com/default/menu" || echo 000)
+            echo "attempt $i: https://plovxanapvl.com/default/menu -> HTTP $code"
             if [ "$code" = "200" ]; then exit 0; fi
             sleep 3
           done
-          echo "::error::Health check failed: /default/menu did not return 200"
+          echo "::error::Health check failed: https://plovxanapvl.com/default/menu did not return 200"
           exit 1
