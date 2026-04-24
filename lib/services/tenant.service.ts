@@ -59,17 +59,25 @@ function getPilotTenant(): TenantPublicConfig {
     footerCreditLine: "",
     footerInstagramLabel: "Instagram",
     contacts: {
-      addressLine:
-        "ТЦ Saida Plaza, пр. Нурсултана Назарбаева, 60/5, 1 этаж, Павлодар",
-      streetAddress:
-        "проспект Нурсултана Назарбаева, 60/5, ТЦ Saida Plaza, 1 этаж",
+      // Было (откат адреса):
+      // addressLine:
+      //   "ТЦ Saida Plaza, пр. Нурсултана Назарбаева, 60/5, 1 этаж, Павлодар",
+      // streetAddress:
+      //   "проспект Нурсултана Назарбаева, 60/5, ТЦ Saida Plaza, 1 этаж",
+      addressLine: "Естая 83, Павлодар, почтовый индекс 140003",
+      streetAddress: "Естая 83, 140003",
       addressLocality: "Павлодар",
       publicEmail: null,
       hoursLine: "Пн — Вс, 11:00–24:00",
-      bookingPhoneDisplay: "+7 777 400 77 28",
-      bookingPhoneE164: "+77774007728",
-      deliveryPhoneDisplay: "+7 707 400 77 28",
-      deliveryPhoneE164: "+77074007728",
+      // Было (откат телефонов):
+      // bookingPhoneDisplay: "+7 777 400 77 28",
+      // bookingPhoneE164: "+77774007728",
+      // deliveryPhoneDisplay: "+7 707 400 77 28",
+      // deliveryPhoneE164: "+77074007728",
+      bookingPhoneDisplay: "+7 701 100 05 70",
+      bookingPhoneE164: "+77011000570",
+      deliveryPhoneDisplay: "+7 701 100 05 70",
+      deliveryPhoneE164: "+77011000570",
       instagramUrl: "https://www.instagram.com/plovxana.pvl/",
       kazansLine: "Казаны: 12:00 • 16:00 • 19:00",
       halalNote: "Заведение халяльное.",
