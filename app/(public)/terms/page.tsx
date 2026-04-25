@@ -3,32 +3,40 @@ import { getLegalInfo } from "@/lib/legal";
 import { LanguageTabs } from "@/components/legal/LanguageTabs";
 
 export const metadata: Metadata = {
-  title: "Terms of Service / Условия использования — PlovXana PVL",
-  description: "Terms governing the use of the PlovXana PVL website and services.",
+  title: "Terms of Service / Условия использования",
+  description:
+    "Условия использования сайта plovxanapvl.com и связанных сервисов.",
 };
 
 export default function TermsPage() {
   const legal = getLegalInfo();
-  const effectiveDate = "26 April 2026";
+  const effectiveDateRu = "26 апреля 2026 г.";
+  const effectiveDateEn = "26 April 2026";
 
   return (
     <main className="mx-auto min-h-screen max-w-2xl px-6 py-24">
-      <h1 className="t-h1">Terms of Service / Условия использования — PlovXana PVL</h1>
-
-      <p className="mt-6 t-micro text-muted-400">Effective date: {effectiveDate}</p>
+      <h1 className="t-h1">Terms of Service / Условия использования</h1>
 
       <div className="mt-10">
         <LanguageTabs
           defaultLang="ru"
           ru={
             <div className="space-y-8">
+              <p className="t-micro text-muted-400">
+                Дата вступления в силу: {effectiveDateRu}
+              </p>
+
               <p className="t-body text-cream-100/80">
-                Настоящие Условия использования (далее — «Условия») регулируют доступ
-                к сайту <span className="whitespace-nowrap">{legal.domain}</span> и
-                использование связанных сервисов (далее — «Сервис»). Сервис
-                управляется <strong className="text-cream-100">{legal.operatorNameRu}</strong>{" "}
-                ({legal.operatorNameEn}) под брендом{" "}
-                <strong className="text-cream-100">{legal.brandName}</strong>.
+                Настоящие Условия использования (далее — «Условия») регулируют доступ к
+                сайту <span className="whitespace-nowrap">{legal.domain}</span> и
+                использование связанных сервисов (далее — «Сервис»). Сервис управляется{" "}
+                <strong className="text-cream-100">{legal.operatorNameRu}</strong> под
+                брендом <strong className="text-cream-100">{legal.brandName}</strong>.
+              </p>
+              <p className="t-body text-cream-100/80">
+                Для международных интеграций (включая Meta) оператор может указываться
+                на английском как:{" "}
+                <span className="whitespace-nowrap">{legal.operatorNameEn}</span>.
               </p>
 
               <h2 className="t-h3">1. Использование сервиса</h2>
@@ -91,12 +99,16 @@ export default function TermsPage() {
           }
           en={
             <div className="space-y-8">
+              <p className="t-micro text-muted-400">
+                Effective date: {effectiveDateEn}
+              </p>
+
               <p className="t-body text-cream-100/80">
                 These Terms of Service (&quot;Terms&quot;) govern your access to and
                 use of <span className="whitespace-nowrap">{legal.domain}</span> and
                 related services (the &quot;Service&quot;). The Service is operated by{" "}
-                <strong className="text-cream-100">{legal.operatorNameEn}</strong>{" "}
-                (the &quot;Operator&quot;) under the brand{" "}
+                <strong className="text-cream-100">{legal.operatorNameEn}</strong> (the
+                &quot;Operator&quot;) under the brand{" "}
                 <strong className="text-cream-100">{legal.brandName}</strong>.
               </p>
 
@@ -130,9 +142,9 @@ export default function TermsPage() {
               <h2 className="t-h3">4. Intellectual Property</h2>
               <p className="mt-4 t-body text-cream-100/80">
                 The Service, including its design, branding, and content, is owned by
-                the Operator or its licensors. You may not copy, modify, or
-                redistribute any part of the Service without prior written permission,
-                except as permitted by law.
+                the Operator or its licensors. You may not copy, modify, or redistribute
+                any part of the Service without prior written permission, except as
+                permitted by law.
               </p>
 
               <h2 className="t-h3">5. Disclaimer and Limitation of Liability</h2>
@@ -163,8 +175,6 @@ export default function TermsPage() {
           }
         />
       </div>
-
     </main>
   );
 }
-
