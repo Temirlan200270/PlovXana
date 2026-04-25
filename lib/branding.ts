@@ -8,7 +8,7 @@
  * тесты — все импортируют эту константу, чтобы не плодить опечатки вроде
  * "PLOVXAHA" / "PLOVXANA", которые ломают индексацию.
  */
-export const BRAND_NAME = "PLOVXАНА" as const;
+export const BRAND_NAME = "PLOVXANA" as const;
 
 /**
  * Слоган для копирайта футера. Пустой `HERITAGE CUISINE` выглядел чужеродно
