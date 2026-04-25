@@ -229,12 +229,14 @@ export function ReserveSection({ copy }: { copy: TenantPublicConfig }) {
                 >
                   {copy.contacts.bookingPhoneDisplay}
                 </a>
-                <a
-                  href={`tel:${copy.contacts.deliveryPhoneE164}`}
-                  className="block t-body text-cream-100/80 transition-colors duration-600 ease-heritage hover:text-gold-500"
-                >
-                  {copy.contacts.deliveryPhoneDisplay}
-                </a>
+                {copy.contacts.deliveryPhoneE164 !== copy.contacts.bookingPhoneE164 ? (
+                  <a
+                    href={`tel:${copy.contacts.deliveryPhoneE164}`}
+                    className="block t-body text-cream-100/80 transition-colors duration-600 ease-heritage hover:text-gold-500"
+                  >
+                    {copy.contacts.deliveryPhoneDisplay}
+                  </a>
+                ) : null}
               </div>
             </div>
           </div>

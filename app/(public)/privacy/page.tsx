@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getLegalInfo } from "@/lib/legal";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: "Privacy Policy / Политика конфиденциальности",
   description:
     "Privacy policy for the Plovxana PVL website and services.",
 };
@@ -13,16 +13,79 @@ export default function PrivacyPage() {
 
   return (
     <main className="mx-auto min-h-screen max-w-2xl px-6 py-24">
-      <h1 className="t-h1">Privacy Policy</h1>
+      <h1 className="t-h1">Privacy Policy / Политика конфиденциальности</h1>
+
+      <div className="mt-8 space-y-8">
+        <section className="space-y-4">
+          <h2 className="t-h3">Русский</h2>
+          <p className="t-body text-cream-100/80">
+            Настоящая Политика конфиденциальности описывает, как{" "}
+            <strong className="text-cream-100">{legal.brandName}</strong>{" "}
+            (далее — «Сервис»), управляемый{" "}
+            <strong className="text-cream-100">{legal.operatorNameRu}</strong>{" "}
+            ({legal.operatorNameEn}), собирает, использует и защищает информацию при
+            использовании сайта{" "}
+            <span className="whitespace-nowrap">{legal.domain}</span> и связанных
+            сервисов.
+          </p>
+          <p className="t-body text-cream-100/80">
+            Оператор персональных данных:{" "}
+            <strong className="text-cream-100">{legal.operatorNameRu}</strong>{" "}
+            {legal.iinBin ? (
+              <span className="whitespace-nowrap">(БИН/ИИН: {legal.iinBin})</span>
+            ) : null}
+            , адрес: <span className="whitespace-nowrap">{legal.addressLine}</span>.
+          </p>
+          <p className="t-body text-cream-100/80">
+            По вопросам обработки персональных данных:{" "}
+            <a
+              href={`mailto:${legal.publicEmail}`}
+              className="whitespace-nowrap text-gold-500 hover:text-gold-400"
+            >
+              {legal.publicEmail}
+            </a>
+            .
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="t-h3">English</h2>
+          <p className="t-body text-cream-100/80">
+            This Privacy Policy explains how{" "}
+            <strong className="text-cream-100">{legal.brandName}</strong> (the
+            &quot;Service&quot;), operated by{" "}
+            <strong className="text-cream-100">{legal.operatorNameEn}</strong> (
+            {legal.operatorNameRu}), collects, uses, and protects information when you
+            use our website <span className="whitespace-nowrap">{legal.domain}</span>{" "}
+            and related services.
+          </p>
+          <p className="t-body text-cream-100/80">
+            Operator: <strong className="text-cream-100">{legal.operatorNameEn}</strong>
+            {legal.iinBin ? (
+              <>
+                {" "}
+                <span className="whitespace-nowrap">(BIN/IIN: {legal.iinBin})</span>
+              </>
+            ) : null}
+            , address: <span className="whitespace-nowrap">{legal.addressLine}</span>.
+          </p>
+          <p className="t-body text-cream-100/80">
+            For privacy-related requests, contact{" "}
+            <a
+              href={`mailto:${legal.publicEmail}`}
+              className="whitespace-nowrap text-gold-500 hover:text-gold-400"
+            >
+              {legal.publicEmail}
+            </a>
+            .
+          </p>
+        </section>
+      </div>
 
       <p className="mt-8 t-body text-cream-100/80">
-        This Privacy Policy explains how{" "}
-        <strong className="text-cream-100">{legal.brandName}</strong> (the
-        &quot;Service&quot;), operated by{" "}
-        <strong className="text-cream-100">{legal.operatorNameEn}</strong>, collects,
-        uses, and protects information when you use our website{" "}
-        <span className="whitespace-nowrap">{legal.domain}</span> and related
-        services.
+        The sections below describe common categories of information we may process
+        and general purposes of processing. They are provided for transparency and do
+        not replace any mandatory disclosures under applicable law.
       </p>
 
       <h2 className="mt-12 t-h3">1. Operator</h2>

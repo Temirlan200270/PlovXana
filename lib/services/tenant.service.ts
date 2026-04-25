@@ -66,8 +66,8 @@ function getPilotTenant(): TenantPublicConfig {
       //   "ТЦ Saida Plaza, пр. Нурсултана Назарбаева, 60/5, 1 этаж, Павлодар",
       // streetAddress:
       //   "проспект Нурсултана Назарбаева, 60/5, ТЦ Saida Plaza, 1 этаж",
-      addressLine: "Естая 83, Павлодар, почтовый индекс 140003",
-      streetAddress: "Естая 83, 140003",
+      addressLine: "Естая 83/1, Павлодар, почтовый индекс 140003",
+      streetAddress: "Естая 83/1, 140003",
       addressLocality: "Павлодар",
       publicEmail: publicEmail,
       hoursLine: "Пн — Вс, 11:00–24:00",
