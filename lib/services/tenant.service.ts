@@ -9,6 +9,8 @@ const PILOT_SLUG = "plovxana";
 
 /** Пилотный маркетинговый слой (fallback, если `home_config` в БД пуст). */
 function getPilotTenant(): TenantPublicConfig {
+  const publicEmail =
+    process.env.LEGAL_PUBLIC_EMAIL?.trim() || "info@plovxanapvl.com";
   return {
     slug: PILOT_SLUG,
     displayName: BRAND_NAME,
@@ -67,7 +69,7 @@ function getPilotTenant(): TenantPublicConfig {
       addressLine: "Естая 83, Павлодар, почтовый индекс 140003",
       streetAddress: "Естая 83, 140003",
       addressLocality: "Павлодар",
-      publicEmail: null,
+      publicEmail: publicEmail,
       hoursLine: "Пн — Вс, 11:00–24:00",
       // Было (откат телефонов):
       // bookingPhoneDisplay: "+7 777 400 77 28",

@@ -3,9 +3,11 @@ import type { TenantPublicConfig } from "@/lib/services/tenant.types";
 import { buildYandexMapsSearchUrl } from "@/lib/utils/maps-url";
 import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/branding";
 import { OpenIndicator } from "@/components/layout/OpenIndicator";
+import { getLegalInfo } from "@/lib/legal";
 
 export function Footer({ copy }: { copy: TenantPublicConfig }) {
   const mapsHref = buildYandexMapsSearchUrl(copy.contacts.addressLine);
+  const legal = getLegalInfo();
 
   return (
     <footer
@@ -68,6 +70,16 @@ export function Footer({ copy }: { copy: TenantPublicConfig }) {
                 </a>
               ) : null}
 
+              {legal.phoneDisplay ? (
+                <div className="t-micro text-muted-400">
+                  {legal.city} · {legal.country}
+                </div>
+              ) : (
+                <div className="t-micro text-muted-400">
+                  {legal.city} · {legal.country}
+                </div>
+              )}
+
               <a
                 href={copy.contacts.instagramUrl}
                 target="_blank"
@@ -92,13 +104,47 @@ export function Footer({ copy }: { copy: TenantPublicConfig }) {
             <div className="t-micro text-muted-400">СДЕЛАНО В СТЕПИ</div>
           </div>
 
-          <div className="mt-8 text-center">
-            <Link
-              href="/privacy"
-              className="t-micro text-muted-400 transition-colors duration-600 ease-heritage hover:text-gold-500"
-            >
-              Политика конфиденциальности
-            </Link>
+          <div className="mt-10 grid gap-6 text-center md:grid-cols-3 md:text-left">
+            <div className="t-micro text-muted-400">
+              <div className="text-cream-100/80">{legal.brandName}</div>
+              <div className="mt-1">
+                {legal.operatorNameRu}
+                {legal.iinBin ? ` · БИН/ИИН: ${legal.iinBin}` : null}
+              </div>
+              <div className="mt-1">{legal.addressLine}</div>
+              <div className="mt-1">
+                <a
+                  href={`mailto:${legal.publicEmail}`}
+                  className="transition-colors duration-600 ease-heritage hover:text-gold-500"
+                >
+                  {legal.publicEmail}
+                </a>
+              </div>
+              <div className="mt-3 text-cream-100/70">
+                This service is operated by {legal.operatorNameEn}.
+              </div>
+            </div>
+
+            <div className="t-micro text-muted-400 md:text-center">
+              <Link
+                href="/privacy"
+                className="transition-colors duration-600 ease-heritage hover:text-gold-500"
+              >
+                Privacy Policy
+              </Link>
+              <span className="mx-2 text-muted-400/70">|</span>
+              <Link
+                href="/terms"
+                className="transition-colors duration-600 ease-heritage hover:text-gold-500"
+              >
+                Terms of Service
+              </Link>
+            </div>
+
+            <div className="t-micro text-muted-400 md:text-right">
+              <div className="text-cream-100/80">Website</div>
+              <div className="mt-1">{legal.domain}</div>
+            </div>
           </div>
         </div>
       </div>

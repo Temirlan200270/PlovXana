@@ -1,168 +1,160 @@
 import type { Metadata } from "next";
+import { getLegalInfo } from "@/lib/legal";
 
 export const metadata: Metadata = {
-  title: "Политика конфиденциальности",
+  title: "Privacy Policy",
   description:
-    "Политика обработки персональных данных посетителей сайта Plovxana.",
+    "Privacy policy for the Plovxana PVL website and services.",
 };
 
-/**
- * Политика конфиденциальности сайта Plovxana.
- *
- * Юридическая основа: Закон Республики Казахстан №94-V «О персональных данных
- * и их защите» от 21.05.2013, а также требования Meta/WhatsApp Business
- * к размещению публичной policy-страницы.
- *
- * В тексте намеренно оставлены маркеры `[...]` (ИП, ТОО, адрес регистрации,
- * e-mail для запросов) — их нужно заполнить реквизитами оператора
- * перед первым релизом на продакшн-домене.
- */
 export default function PrivacyPage() {
-  const lastUpdated = "23 апреля 2026 г.";
+  const legal = getLegalInfo();
+  const lastUpdated = "26 April 2026";
 
   return (
     <main className="mx-auto min-h-screen max-w-2xl px-6 py-24">
-      <h1 className="t-h1">Политика конфиденциальности</h1>
+      <h1 className="t-h1">Privacy Policy</h1>
 
       <p className="mt-8 t-body text-cream-100/80">
-        Настоящая Политика описывает, какие данные посетителей собирает сайт
-        <span className="whitespace-nowrap"> plovxana.kz</span> (далее — «Сайт»),
-        для каких целей они используются, сколько хранятся и какими правами
-        обладает субъект персональных данных. Документ составлен в соответствии
-        с Законом Республики Казахстан №94-V от 21 мая 2013 года
-        «О персональных данных и их защите».
+        This Privacy Policy explains how{" "}
+        <strong className="text-cream-100">{legal.brandName}</strong> (the
+        &quot;Service&quot;), operated by{" "}
+        <strong className="text-cream-100">{legal.operatorNameEn}</strong>, collects,
+        uses, and protects information when you use our website{" "}
+        <span className="whitespace-nowrap">{legal.domain}</span> and related
+        services.
       </p>
 
-      <h2 className="mt-12 t-h3">1. Оператор</h2>
+      <h2 className="mt-12 t-h3">1. Operator</h2>
       <p className="mt-4 t-body text-cream-100/80">
-        Оператором персональных данных является ресторан «Plovxana»
-        <span className="whitespace-nowrap"> ([ИП/ТОО «...»],</span> БИН/ИИН{" "}
-        [...], юридический адрес: Республика Казахстан, г. Павлодар, пр.
-        Нурсултана Назарбаева, 60/5, ТЦ Saida Plaza, 1 этаж).
+        The operator responsible for processing personal data is{" "}
+        <strong className="text-cream-100">{legal.operatorNameEn}</strong>{" "}
+        (<span className="whitespace-nowrap">{legal.operatorNameRu}</span>){" "}
+        {legal.iinBin ? (
+          <span className="whitespace-nowrap">(БИН/ИИН: {legal.iinBin})</span>
+        ) : null}
+        , address:{" "}
+        <span className="whitespace-nowrap">{legal.addressLine}</span>.
       </p>
 
-      <h2 className="mt-12 t-h3">2. Какие данные мы собираем</h2>
+      <h2 className="mt-12 t-h3">2. Information we collect</h2>
       <p className="mt-4 t-body text-cream-100/80">
-        При использовании Сайта вы можете добровольно передать нам следующие
-        категории персональных данных:
-      </p>
-      <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
-        <li>
-          <strong className="text-cream-100">Форма бронирования:</strong> имя
-          (любой формат обращения), номер телефона, желаемые дата и время
-          визита, количество гостей, пожелания к брони.
-        </li>
-        <li>
-          <strong className="text-cream-100">Технические данные,</strong>{" "}
-          собираемые автоматически: IP-адрес, тип устройства и браузера, язык,
-          время визита, страницы, с которых вы пришли.
-        </li>
-        <li>
-          <strong className="text-cream-100">Файлы cookie</strong> — небольшие
-          технические идентификаторы сессии (подробнее — п. 7).
-        </li>
-      </ul>
-      <p className="mt-4 t-body text-cream-100/80">
-        Сайт <strong>не собирает</strong> платёжные данные, паспортные данные,
-        биометрию и специальные категории персональных данных.
-      </p>
-
-      <h2 className="mt-12 t-h3">3. Цели обработки</h2>
-      <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
-        <li>Принять и подтвердить бронь стола.</li>
-        <li>
-          Связаться с вами по указанному номеру для уточнения деталей визита.
-        </li>
-        <li>Соблюдать требования законодательства Республики Казахстан.</li>
-        <li>
-          Обезличенная аналитика посещаемости Сайта для улучшения сервиса.
-        </li>
-      </ul>
-
-      <h2 className="mt-12 t-h3">4. Правовое основание</h2>
-      <p className="mt-4 t-body text-cream-100/80">
-        Обработка данных производится на основании вашего согласия, которое
-        вы выражаете, отправляя форму бронирования. Согласие можно отозвать
-        в любой момент, написав на адрес, указанный в п. 9.
-      </p>
-
-      <h2 className="mt-12 t-h3">5. Сроки хранения</h2>
-      <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
-        <li>
-          Данные из формы бронирования хранятся <strong>не более 90 дней</strong>{" "}
-          с даты брони, после чего удаляются или обезличиваются.
-        </li>
-        <li>
-          Технические логи хранятся <strong>до 30 дней</strong> для целей
-          безопасности.
-        </li>
-        <li>
-          Файлы cookie — в соответствии с настройками вашего браузера, но не
-          более <strong>365 дней</strong>.
-        </li>
-      </ul>
-
-      <h2 className="mt-12 t-h3">6. Передача третьим лицам</h2>
-      <p className="mt-4 t-body text-cream-100/80">
-        Мы не продаём и не передаём персональные данные третьим лицам в
-        коммерческих целях. Данные могут быть переданы только:
+        We may collect the following categories of information:
       </p>
       <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
         <li>
-          Поставщикам инфраструктуры, через которых работает Сайт (хостинг,
-          CDN, облачная база данных) — исключительно в объёме, необходимом
-          для их функционирования.
+          <strong className="text-cream-100">Contact/booking details:</strong> name,
+          phone number, email address (if provided), requested date/time and other
+          details you submit.
         </li>
         <li>
-          Государственным органам — только в случаях, прямо предусмотренных
-          законодательством Республики Казахстан, и на основании
-          соответствующего запроса.
+          <strong className="text-cream-100">Usage data:</strong> IP address, browser
+          type, device information, language, timestamps, and pages visited.
+        </li>
+        <li>
+          <strong className="text-cream-100">Cookies:</strong> technical identifiers
+          used to support website functionality (see section 7).
+        </li>
+      </ul>
+      <p className="mt-4 t-body text-cream-100/80">
+        We do <strong>not</strong> intentionally collect payment card details,
+        government IDs, biometric data, or special categories of personal data.
+      </p>
+
+      <h2 className="mt-12 t-h3">3. How we use information</h2>
+      <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+        <li>To provide and maintain the Service.</li>
+        <li>
+          To communicate with you and respond to requests.
+        </li>
+        <li>
+          To improve functionality and user experience.
+        </li>
+        <li>To ensure security and prevent fraud or abuse.</li>
+        <li>To comply with legal obligations.</li>
+      </ul>
+
+      <h2 className="mt-12 t-h3">4. Legal basis</h2>
+      <p className="mt-4 t-body text-cream-100/80">
+        Where required, we process personal data based on your consent (for example,
+        when you submit a request). You may withdraw consent by contacting us using
+        the details in section 9.
+      </p>
+
+      <h2 className="mt-12 t-h3">5. Data retention</h2>
+      <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+        <li>
+          Request details are retained for up to <strong>90 days</strong>, then
+          deleted or anonymized unless a longer retention is required by law.
+        </li>
+        <li>
+          Security and technical logs are retained for up to <strong>30 days</strong>.
+        </li>
+        <li>
+          Cookies are retained according to your browser settings, generally up to{" "}
+          <strong>365 days</strong>.
         </li>
       </ul>
 
-      <h2 className="mt-12 t-h3">7. Cookie и аналитика</h2>
+      <h2 className="mt-12 t-h3">6. Sharing of information</h2>
       <p className="mt-4 t-body text-cream-100/80">
-        На Сайте используются технические cookie, необходимые для работы
-        интерфейса (сохранение выбранной вкладки меню, защита от
-        автозаполнения ботами). Отключение cookie в настройках браузера может
-        привести к частичной потере функциональности.
-      </p>
-
-      <h2 className="mt-12 t-h3">8. Ваши права</h2>
-      <p className="mt-4 t-body text-cream-100/80">
-        В любое время вы можете:
+        We do not sell personal data. We may share information only:
       </p>
       <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
-        <li>получить копию ваших персональных данных;</li>
-        <li>потребовать их изменения или удаления;</li>
-        <li>отозвать согласие на обработку;</li>
         <li>
-          обратиться с жалобой в уполномоченный орган по защите персональных
-          данных Республики Казахстан.
+          With service providers (hosting, analytics, infrastructure) strictly as
+          necessary to operate the Service.
+        </li>
+        <li>
+          With authorities when required by applicable law and valid requests.
         </li>
       </ul>
 
-      <h2 className="mt-12 t-h3">9. Контакты для запросов</h2>
+      <h2 className="mt-12 t-h3">7. Cookies</h2>
       <p className="mt-4 t-body text-cream-100/80">
-        По вопросам, связанным с персональными данными, обратитесь:
+        We use essential cookies to support website functionality and security.
+        Disabling cookies in your browser may reduce functionality.
+      </p>
+
+      <h2 className="mt-12 t-h3">8. Your rights</h2>
+      <p className="mt-4 t-body text-cream-100/80">
+        Depending on applicable law, you may request:
       </p>
       <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
-        <li>по телефону бронирования, указанному в разделе «Контакты»;</li>
+        <li>access to your personal data;</li>
+        <li>correction or deletion;</li>
+        <li>withdrawal of consent;</li>
         <li>
-          по электронной почте:{" "}
-          <span className="whitespace-nowrap">[privacy@plovxana.kz]</span>.
+          submitting a complaint to the relevant data protection authority.
         </li>
       </ul>
 
-      <h2 className="mt-12 t-h3">10. Изменения политики</h2>
+      <h2 className="mt-12 t-h3">9. Contact</h2>
       <p className="mt-4 t-body text-cream-100/80">
-        Мы можем обновлять настоящую Политику по мере развития сервиса и
-        изменений в законодательстве. Актуальная версия всегда опубликована
-        на этой странице, а дата последнего обновления указана ниже.
+        For privacy-related requests, contact:
+      </p>
+      <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+        <li>
+          by email:{" "}
+          <a
+            href={`mailto:${legal.publicEmail}`}
+            className="whitespace-nowrap text-gold-500 hover:text-gold-400"
+          >
+            {legal.publicEmail}
+          </a>
+          .
+        </li>
+      </ul>
+
+      <h2 className="mt-12 t-h3">10. Changes to this policy</h2>
+      <p className="mt-4 t-body text-cream-100/80">
+        We may update this Privacy Policy from time to time. The latest version will
+        always be published on this page and the &quot;Last updated&quot; date will
+        be adjusted.
       </p>
 
       <p className="mt-12 t-micro">
-        Последнее обновление: {lastUpdated}
+        Last updated: {lastUpdated}
       </p>
     </main>
   );

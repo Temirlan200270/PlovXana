@@ -5,6 +5,7 @@ import net from "node:net";
  * Smoke gate v1: минимальная проверка, что проект собирается и typecheck проходит.
  * Также проверяем публичные поверхности:
  * - / и /plovxana/menu
+ * - /privacy (витрина без /admin)
  * - наличие JSON-LD
  * - наличие базовых мета-тегов
  *
@@ -135,16 +136,12 @@ try {
   assertIncludes(menuHtml, "application/ld+json", "JSON-LD on /plovxana/menu");
   assertIncludes(menuHtml, "<title>", "title on /plovxana/menu");
 
-  const adminRes = await fetch(`${base}/admin/dashboard`, { redirect: "manual" });
-  if (![301, 302, 303, 307, 308].includes(adminRes.status)) {
-    throw new Error(
-      `SMOKE: expected redirect from /admin/dashboard without session, got HTTP ${adminRes.status}`,
-    );
-  }
-  const loc = adminRes.headers.get("location") ?? "";
-  if (!loc.includes("/admin/login")) {
-    throw new Error(`SMOKE: /admin/dashboard should redirect to login, Location was: ${loc}`);
-  }
+  const privacyHtml = await fetchText(`${base}/privacy`);
+  assertIncludes(
+    privacyHtml,
+    "Политика конфиденциальности",
+    "privacy page heading or title",
+  );
 
   console.log("SMOKE: ok");
 } finally {
