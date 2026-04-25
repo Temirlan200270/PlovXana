@@ -3,8 +3,8 @@ import { getLegalInfo } from "@/lib/legal";
 import { LanguageTabs } from "@/components/legal/LanguageTabs";
 
 export const metadata: Metadata = {
-  title: "Terms of Service / Условия использования",
-  description: "Terms governing the use of the Plovxana PVL website and services.",
+  title: "Terms of Service / Условия использования — PlovXana PVL",
+  description: "Terms governing the use of the PlovXana PVL website and services.",
 };
 
 export default function TermsPage() {
@@ -13,7 +13,7 @@ export default function TermsPage() {
 
   return (
     <main className="mx-auto min-h-screen max-w-2xl px-6 py-24">
-      <h1 className="t-h1">Terms of Service / Условия использования</h1>
+      <h1 className="t-h1">Terms of Service / Условия использования — PlovXana PVL</h1>
 
       <p className="mt-6 t-micro text-muted-400">Effective date: {effectiveDate}</p>
 

@@ -28,7 +28,7 @@ function getPilotTenant(): TenantPublicConfig {
     aboutTitleLine1: "Огонь, который",
     aboutTitleAccent: "помнит предков.",
     aboutLead:
-      "Plovxana — это не ресторан. Это дастархан, за которым встречаются поколения. Наши казаны — из меди, привезённой из Бухары. Рис — из Ферганской долины. А рецепт плова передаётся в семье шеф-повара уже четыре поколения.",
+      `${BRAND_NAME} — это не ресторан. Это дастархан, за которым встречаются поколения. Наши казаны — из меди, привезённой из Бухары. Рис — из Ферганской долины. А рецепт плова передаётся в семье шеф-повара уже четыре поколения.`,
     aboutClosingItalic:
       "Каждое блюдо — это рассказ. Каждая специя — строчка в эпосе, звучащем под струны домбры.",
     aboutStats: [
@@ -93,7 +93,7 @@ function mergePilotWithNonPilotTenantRow(tenant: TenantRow): TenantPublicConfig 
   return {
     ...base,
     slug: tenant.slug,
-    displayName: tenant.name,
+    displayName: BRAND_NAME,
     contacts: {
       ...base.contacts,
       addressLine: tenant.address?.trim() || base.contacts.addressLine,
@@ -142,7 +142,7 @@ export function buildPublicConfigFromRow(tenant: TenantRow): TenantPublicConfig 
     tenant.slug === PILOT_SLUG
       ? {
           ...pilot,
-          displayName: tenant.name?.trim() || pilot.displayName,
+          displayName: BRAND_NAME,
         }
       : mergePilotWithNonPilotTenantRow(tenant);
 

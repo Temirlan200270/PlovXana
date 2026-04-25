@@ -26,7 +26,7 @@ export function AboutSection({ copy }: { copy: TenantPublicConfig }) {
               <div className="relative aspect-[4/5] w-full">
                 <Image
                   src={copy.aboutPhotoUrl}
-                  alt="Plovxana"
+                  alt="PlovXana PVL"
                   fill
                   className="object-cover opacity-90"
                   sizes="(max-width: 1024px) 100vw, 50vw"

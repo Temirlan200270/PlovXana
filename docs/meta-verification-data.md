@@ -10,7 +10,7 @@
 
 ## 2) Что Meta должна увидеть на сайте
 
-- Упоминание связки **бренд ↔ юр.лицо**: `Plovxana PVL` + `ИП Абишев`
+- Упоминание связки **бренд ↔ юр.лицо**: `PlovXana PVL` + `ИП Абишев`
 - Контактный email **на домене**: `@plovxanapvl.com`
 - Город/страна: Павлодар, Казахстан
 - Публичные policy-страницы:
@@ -31,7 +31,7 @@
 
 Обязательные (можно оставить по умолчанию, но лучше явно задать):
 
-- `LEGAL_BRAND_NAME` (пример: `Plovxana PVL`)
+- `LEGAL_BRAND_NAME` (пример: `PlovXana PVL`)
 - `LEGAL_OPERATOR_NAME_RU` (пример: `ИП Абишев`)
 - `LEGAL_OPERATOR_NAME_EN` (пример: `Individual Entrepreneur Abishev (Kazakhstan)`)
 - `LEGAL_DOMAIN` (пример: `plovxanapvl.com`)

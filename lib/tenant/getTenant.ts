@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { PHASE_PRODUCTION_BUILD } from "next/constants";
 import { createSupabaseAnonServerClient } from "@/lib/supabase/anon-server";
 import { isSupabaseConfigured } from "@/lib/supabase/server";
+import { BRAND_NAME } from "@/lib/branding";
 import { PILOT_TENANT_ROW } from "@/lib/tenant/pilotTenant";
 import { TenantRowSchema, type TenantRow } from "@/lib/validation/menu";
 
@@ -48,9 +49,7 @@ export async function getTenantSlugFromHost(): Promise<string | null> {
  * которое не должно попадать в UI/SEO нашего сайта.
  * Переопределение — через env `NEXT_PUBLIC_BRAND_NAME` с безопасным fallback.
  */
-const BRAND_NAME_OVERRIDE = (
-  process.env.NEXT_PUBLIC_BRAND_NAME ?? "Plovxana"
-).trim();
+const BRAND_NAME_OVERRIDE = (process.env.NEXT_PUBLIC_BRAND_NAME ?? BRAND_NAME).trim();
 
 /**
  * Маппит строку `organizations` из БД бота в TenantRow для UI.

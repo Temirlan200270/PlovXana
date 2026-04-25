@@ -1,3 +1,5 @@
+import { BRAND_NAME } from "@/lib/branding";
+
 export type LegalInfo = {
   brandName: string;
   operatorNameRu: string;
@@ -32,7 +34,7 @@ function readOptionalEnv(key: string): string | null {
  */
 export function getLegalInfo(): LegalInfo {
   return {
-    brandName: readRequiredEnv("LEGAL_BRAND_NAME", "Plovxana PVL"),
+    brandName: readRequiredEnv("LEGAL_BRAND_NAME", BRAND_NAME),
     operatorNameRu: readRequiredEnv("LEGAL_OPERATOR_NAME_RU", "ИП АБИШЕВ"),
     operatorNameEn: readRequiredEnv(
       "LEGAL_OPERATOR_NAME_EN",

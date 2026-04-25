@@ -63,8 +63,8 @@ export function buildMenuMetadata(
   copy: TenantPublicConfig,
 ): Metadata {
   const base = getSiteUrl();
-  const title = `Меню — ${tenant.name}`;
-  const description = `Актуальное меню ${tenant.name}. ${copy.contacts.hoursLine}. Доставка и бронь столов.`;
+  const title = `Меню — ${copy.displayName}`;
+  const description = `Актуальное меню ${copy.displayName}. ${copy.contacts.hoursLine}. Доставка и бронь столов.`;
   const url = `${base}/${tenant.slug}/menu`;
 
   return {
@@ -76,7 +76,7 @@ export function buildMenuMetadata(
       description,
       type: "website",
       url,
-      siteName: tenant.name,
+      siteName: copy.displayName,
       locale: "ru_RU",
     },
     twitter: {

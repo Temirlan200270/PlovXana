@@ -3,9 +3,9 @@ import { getLegalInfo } from "@/lib/legal";
 import { LanguageTabs } from "@/components/legal/LanguageTabs";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy / Политика конфиденциальности",
+  title: "Privacy Policy / Политика конфиденциальности — PlovXana PVL",
   description:
-    "Privacy policy for the Plovxana PVL website and services.",
+    "Privacy policy for the PlovXana PVL website and services.",
 };
 
 export default function PrivacyPage() {
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
 
   return (
     <main className="mx-auto min-h-screen max-w-2xl px-6 py-24">
-      <h1 className="t-h1">Privacy Policy / Политика конфиденциальности</h1>
+      <h1 className="t-h1">Privacy Policy / Политика конфиденциальности — PlovXana PVL</h1>
 
       <div className="mt-10">
         <LanguageTabs

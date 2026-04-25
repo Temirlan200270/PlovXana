@@ -1,6 +1,6 @@
 import type { PlateVariant } from "@/components/ornaments/PlateIcon";
 
-/** Контакты и часы — канон как в blueprint.md (пилот PLOVXАНА). */
+/** Контакты и часы — канон как в blueprint.md (пилот PlovXana PVL). */
 export type TenantContacts = {
   /** Одна строка для футера и UI. */
   addressLine: string;
