@@ -12,7 +12,7 @@ body {
 }
 
 body {
-  @apply bg-umber-950 text-cream-100 font-sans;
+  @apply bg-[#0f172a] text-[#e2e8f0] font-sans;
 }
 
 /* Film grain — subtle, always under content. */

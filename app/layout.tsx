@@ -1,21 +1,13 @@
 import type { Metadata } from "next";
 import { AgentationDev } from "@/components/dev/AgentationDev";
-import { OrnamentSprite } from "@/components/ornaments/OrnamentSprite";
 import { BRAND_NAME } from "@/lib/branding";
 import "./globals.css";
-import { Inter, Playfair_Display } from "next/font/google";
-
-const fontSerif = Playfair_Display({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-serif",
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
-});
+import { Inter } from "next/font/google";
 
 const fontSans = Inter({
   subsets: ["latin", "cyrillic"],
   variable: "--font-sans",
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +16,8 @@ export const metadata: Metadata = {
     default: BRAND_NAME,
     template: `%s · ${BRAND_NAME}`,
   },
-  description: "Халяльная кухня, доставка, бронь столов. Павлодар.",
+  description:
+    "ИП Абишев: сервис приёма и обработки заказов для кафе в Казахстане.",
 };
 
 export default function RootLayout({
@@ -34,9 +27,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`${fontSerif.variable} ${fontSans.variable} antialiased`}>
+      <body className={`${fontSans.variable} font-sans antialiased`}>
         {children}
-        <OrnamentSprite />
         <AgentationDev />
       </body>
     </html>

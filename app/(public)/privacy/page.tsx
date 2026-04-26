@@ -3,9 +3,9 @@ import { getLegalInfo } from "@/lib/legal";
 import { LanguageTabs } from "@/components/legal/LanguageTabs";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy / Политика конфиденциальности",
+  title: "Политика конфиденциальности / Privacy Policy",
   description:
-    "Политика конфиденциальности и обработки данных для сайта plovxanapvl.com и связанных сервисов.",
+    "Политика конфиденциальности ИП Абишев для сайта и сервиса обработки заказов для кафе и ресторанов.",
 };
 
 export default function PrivacyPage() {
@@ -14,101 +14,73 @@ export default function PrivacyPage() {
   const lastUpdatedEn = "26 April 2026";
 
   return (
-    <main className="mx-auto min-h-screen max-w-2xl px-6 py-24">
-      <h1 className="t-h1">Privacy Policy / Политика конфиденциальности</h1>
+    <main className="min-h-screen bg-[#0f172a] px-6 py-16 text-[#e2e8f0] md:px-12">
+      <div className="mx-auto max-w-[1100px]">
+        <h1 className="max-w-[18ch] text-4xl font-semibold leading-tight md:text-5xl">
+          Политика конфиденциальности / Privacy Policy
+        </h1>
+        <p className="mt-4 max-w-[80ch] text-sm text-slate-300">
+          Документ описывает обработку персональных данных на сайте {legal.domain} и в
+          связанных обращениях по сервису обработки заказов для кафе. / This document
+          describes personal data processing on {legal.domain} and related requests for
+          the cafe order-processing service.
+        </p>
 
-      <div className="mt-10">
-        <LanguageTabs
-          defaultLang="ru"
-          ru={
-            <div className="space-y-10">
-              <section className="space-y-4">
-                <p className="t-body text-cream-100/80">
-                  Настоящая Политика конфиденциальности описывает, как{" "}
-                  <strong className="text-cream-100">{legal.brandName}</strong> (далее
-                  — «Сервис»), управляемый{" "}
-                  <strong className="text-cream-100">{legal.operatorNameRu}</strong>,
-                  обрабатывает информацию при использовании сайта{" "}
-                  <span className="whitespace-nowrap">{legal.domain}</span> и связанных
-                  сервисов.
-                </p>
-                <p className="t-body text-cream-100/80">
-                  Для международных интеграций (включая Meta) оператор может указываться
-                  на английском как:{" "}
-                  <span className="whitespace-nowrap">{legal.operatorNameEn}</span>.
-                </p>
-                <p className="t-body text-cream-100/80">
-                  Оператор персональных данных:{" "}
-                  <strong className="text-cream-100">{legal.operatorNameRu}</strong>
-                  {legal.iinBin ? (
-                    <span className="whitespace-nowrap"> (БИН/ИИН: {legal.iinBin})</span>
-                  ) : null}
-                  , адрес:{" "}
-                  <span className="whitespace-nowrap">{legal.addressLine}</span>.
-                </p>
-                <p className="t-body text-cream-100/80">
-                  По вопросам обработки персональных данных:{" "}
-                  <a
-                    href={`mailto:${legal.publicEmail}`}
-                    className="whitespace-nowrap text-gold-500 hover:text-gold-400"
-                  >
-                    {legal.publicEmail}
-                  </a>
-                  .
-                </p>
-              </section>
+        <div className="mt-10 rounded-xl border border-slate-700 bg-[#1e293b] p-6 md:p-8">
+          <LanguageTabs
+            defaultLang="ru"
+            showControls={false}
+            useUrlLang
+            ru={
+              <div className="space-y-8 text-sm leading-7 text-slate-200">
+                <section className="space-y-3">
+                  <p>
+                    Настоящая Политика конфиденциальности описывает, как сервис{" "}
+                    <strong>{legal.brandName}</strong>, управляемый{" "}
+                    <strong>{legal.operatorNameRu}</strong>, обрабатывает информацию при
+                    использовании сайта <span className="whitespace-nowrap">{legal.domain}</span> и
+                    при обращении за внедрением решений для обработки заказов в кафе.
+                  </p>
+                </section>
 
-              <p className="t-body text-cream-100/80">
-                Разделы ниже описывают типовые категории данных и цели обработки. Документ
-                носит информационный характер и не заменяет обязательные уведомления,
-                если они требуются применимым законодательством.
+              <p className="text-slate-300">
+                Разделы ниже описывают категории данных, цели обработки и права пользователя в
+                рамках применимого законодательства Республики Казахстан.
               </p>
 
               <section>
-                <h2 className="t-h3">1. Оператор</h2>
-                <p className="mt-4 t-body text-cream-100/80">
-                  Оператором персональных данных является{" "}
-                  <strong className="text-cream-100">{legal.operatorNameRu}</strong>
-                  {legal.iinBin ? (
-                    <span className="whitespace-nowrap"> (БИН/ИИН: {legal.iinBin})</span>
-                  ) : null}
-                  , адрес:{" "}
-                  <span className="whitespace-nowrap">{legal.addressLine}</span>.
+                <h2 className="text-xl font-semibold">1. Оператор</h2>
+                <p className="mt-3">
+                  Оператор персональных данных — {legal.operatorNameRu}
+                  {legal.iinBin ? ` (БИН/ИИН: ${legal.iinBin})` : ""}, адрес: {legal.addressLine}.
+                  Для международных сервисов оператор может указываться на английском как{" "}
+                  <span className="whitespace-nowrap">{legal.operatorNameEn}</span>.
                 </p>
               </section>
 
               <section>
-                <h2 className="t-h3">2. Какие данные мы можем обрабатывать</h2>
-                <p className="mt-4 t-body text-cream-100/80">
-                  Мы можем обрабатывать следующие категории информации:
-                </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <h2 className="text-xl font-semibold">2. Какие данные мы можем обрабатывать</h2>
+                <p className="mt-3">Мы можем обрабатывать следующие категории информации:</p>
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>
-                    <strong className="text-cream-100">Контактные данные / данные
-                    запросов:</strong> имя, номер телефона, адрес электронной почты (если
-                    указан), дата/время и иные сведения, которые вы добровольно
-                    передаёте через формы или коммуникации.
+                    контактные данные и данные обращений: имя, телефон, email (если указан), дата
+                    и время обращения, содержание сообщения;
                   </li>
                   <li>
-                    <strong className="text-cream-100">Технические данные:</strong> IP,
-                    тип браузера, язык, сведения об устройстве, время посещения,
-                    просмотренные страницы.
+                    технические данные: IP-адрес, тип браузера, устройство, язык, время посещения,
+                    просмотренные страницы;
                   </li>
-                  <li>
-                    <strong className="text-cream-100">Cookie:</strong> технические
-                    идентификаторы, необходимые для работы сайта (см. раздел 7).
-                  </li>
+                  <li>cookie и аналогичные технические идентификаторы, необходимые для работы сайта.</li>
                 </ul>
-                <p className="mt-4 t-body text-cream-100/80">
-                  Мы <strong>не собираем намеренно</strong> реквизиты банковских карт,
-                  паспортные данные, биометрию и специальные категории персональных
-                  данных.
+                <p className="mt-3">
+                  Мы не собираем намеренно данные банковских карт, биометрию и специальные категории
+                  персональных данных.
                 </p>
               </section>
 
               <section>
-                <h2 className="t-h3">3. Цели обработки</h2>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <h2 className="text-xl font-semibold">3. Цели обработки</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>предоставление и поддержание работы Сервиса;</li>
                   <li>связь с вами и обработка запросов;</li>
                   <li>улучшение функциональности и пользовательского опыта;</li>
@@ -118,8 +90,8 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">4. Правовые основания</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">4. Правовые основания</h2>
+                <p className="mt-3">
                   Обработка может осуществляться на основании вашего согласия (например,
                   при отправке формы), а также на иных основаниях, предусмотренных
                   законодательством Республики Казахстан. Отозвать согласие можно,
@@ -128,8 +100,8 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">5. Сроки хранения</h2>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <h2 className="text-xl font-semibold">5. Сроки хранения</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>
                     данные запросов — до <strong>90 дней</strong>, после чего удаляются
                     или обезличиваются, если иное не требуется законом;
@@ -145,11 +117,11 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">6. Передача третьим лицам</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">6. Передача третьим лицам</h2>
+                <p className="mt-3">
                   Мы не продаём персональные данные. Передача возможна только:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>
                     поставщикам инфраструктуры (хостинг, CDN, аналитика) — в объёме,
                     необходимом для работы Сервиса;
@@ -162,19 +134,19 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">7. Cookie</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">7. Cookie</h2>
+                <p className="mt-3">
                   Мы используем необходимые cookie для работы сайта и безопасности.
                   Отключение cookie в браузере может ограничить часть функций.
                 </p>
               </section>
 
               <section>
-                <h2 className="t-h3">8. Ваши права</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">8. Ваши права</h2>
+                <p className="mt-3">
                   В пределах, предусмотренных применимым правом, вы можете запросить:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>доступ к персональным данным;</li>
                   <li>исправление или удаление;</li>
                   <li>отзыв согласия;</li>
@@ -183,12 +155,12 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">9. Контакты</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">9. Контакты</h2>
+                <p className="mt-3">
                   По вопросам конфиденциальности:{" "}
                   <a
                     href={`mailto:${legal.publicEmail}`}
-                    className="whitespace-nowrap text-gold-500 hover:text-gold-400"
+                    className="whitespace-nowrap text-[#22c55e] hover:text-[#4ade80]"
                   >
                     {legal.publicEmail}
                   </a>
@@ -197,62 +169,39 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">10. Изменения политики</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">10. Изменения политики</h2>
+                <p className="mt-3">
                   Мы можем обновлять настоящую Политику. Актуальная версия всегда
                   размещена на этой странице; дата последнего обновления указана ниже.
                 </p>
               </section>
 
-              <p className="t-micro text-muted-400">Последнее обновление: {lastUpdatedRu}</p>
+              <p className="text-xs text-slate-400">Последнее обновление: {lastUpdatedRu}</p>
             </div>
-          }
-          en={
-            <div className="space-y-10">
-              <section className="space-y-4">
-                <p className="t-body text-cream-100/80">
-                  This Privacy Policy explains how{" "}
-                  <strong className="text-cream-100">{legal.brandName}</strong> (the
-                  &quot;Service&quot;), operated by{" "}
-                  <strong className="text-cream-100">{legal.operatorNameEn}</strong> (
-                  {legal.operatorNameRu}), collects, uses, and protects information when
-                  you use our website{" "}
-                  <span className="whitespace-nowrap">{legal.domain}</span> and related
-                  services.
-                </p>
-                <p className="t-body text-cream-100/80">
-                  Operator:{" "}
-                  <strong className="text-cream-100">{legal.operatorNameEn}</strong>
-                  {legal.iinBin ? (
-                    <span className="whitespace-nowrap"> (BIN/IIN: {legal.iinBin})</span>
-                  ) : null}
-                  , address:{" "}
-                  <span className="whitespace-nowrap">{legal.addressLine}</span>.
-                </p>
-                <p className="t-body text-cream-100/80">
-                  For privacy-related requests, contact{" "}
-                  <a
-                    href={`mailto:${legal.publicEmail}`}
-                    className="whitespace-nowrap text-gold-500 hover:text-gold-400"
-                  >
-                    {legal.publicEmail}
-                  </a>
-                  .
-                </p>
-              </section>
+            }
+            en={
+              <div className="space-y-8 text-sm leading-7 text-slate-200">
+                <section className="space-y-3">
+                  <p>
+                    This Privacy Policy explains how{" "}
+                    <strong>{legal.brandName}</strong>, operated by{" "}
+                    <strong>{legal.operatorNameEn}</strong> ({legal.operatorNameRu}), processes
+                    information when you use our website{" "}
+                    <span className="whitespace-nowrap">{legal.domain}</span> or request
+                    order-processing solutions for cafes.
+                  </p>
+                </section>
 
-              <p className="t-body text-cream-100/80">
-                The sections below describe common categories of information we may
-                process and general purposes of processing. They are provided for
-                transparency and do not replace any mandatory disclosures under
-                applicable law.
+              <p className="text-slate-300">
+                The sections below describe categories of data, processing purposes, and user
+                rights under the applicable laws of the Republic of Kazakhstan.
               </p>
 
               <section>
-                <h2 className="t-h3">1. Operator</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">1. Operator</h2>
+                <p className="mt-3">
                   The operator responsible for processing personal data is{" "}
-                  <strong className="text-cream-100">{legal.operatorNameEn}</strong> (
+                  <strong>{legal.operatorNameEn}</strong> (
                   <span className="whitespace-nowrap">{legal.operatorNameRu}</span>)
                   {legal.iinBin ? (
                     <span className="whitespace-nowrap"> (BIN/IIN: {legal.iinBin})</span>
@@ -263,35 +212,30 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">2. Information we collect</h2>
-                <p className="mt-4 t-body text-cream-100/80">
-                  We may collect the following categories of information:
-                </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <h2 className="text-xl font-semibold">2. Information we collect</h2>
+                <p className="mt-3">We may collect the following categories of information:</p>
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>
-                    <strong className="text-cream-100">Contact/booking details:</strong>{" "}
-                    name, phone number, email address (if provided), requested date/time
-                    and other details you submit.
+                    contact/request details: name, phone number, email (if provided), timestamps,
+                    and details submitted in your request;
                   </li>
                   <li>
-                    <strong className="text-cream-100">Usage data:</strong> IP address,
-                    browser type, device information, language, timestamps, and pages
-                    visited.
+                    usage data: IP address, browser type, device information, language, timestamps,
+                    and visited pages;
                   </li>
                   <li>
-                    <strong className="text-cream-100">Cookies:</strong> technical
-                    identifiers used to support website functionality (see section 7).
+                    cookies and similar technical identifiers required for website functionality.
                   </li>
                 </ul>
-                <p className="mt-4 t-body text-cream-100/80">
+                <p className="mt-3">
                   We do <strong>not</strong> intentionally collect payment card details,
-                  government IDs, biometric data, or special categories of personal data.
+                  biometric data, or special categories of personal data.
                 </p>
               </section>
 
               <section>
-                <h2 className="t-h3">3. How we use information</h2>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <h2 className="text-xl font-semibold">3. How we use information</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>To provide and maintain the Service.</li>
                   <li>To communicate with you and respond to requests.</li>
                   <li>To improve functionality and user experience.</li>
@@ -301,17 +245,18 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">4. Legal basis</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">4. Legal basis</h2>
+                <p className="mt-3">
                   Where required, we process personal data based on your consent (for
-                  example, when you submit a request). You may withdraw consent by
+                  example, when you submit a request), as well as other grounds provided
+                  by the laws of the Republic of Kazakhstan. You may withdraw consent by
                   contacting us using the details in section 9.
                 </p>
               </section>
 
               <section>
-                <h2 className="t-h3">5. Data retention</h2>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <h2 className="text-xl font-semibold">5. Data retention</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>
                     Request details are retained for up to <strong>90 days</strong>,
                     then deleted or anonymized unless a longer retention is required by
@@ -329,11 +274,11 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">6. Sharing of information</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">6. Sharing of information</h2>
+                <p className="mt-3">
                   We do not sell personal data. We may share information only:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>
                     With service providers (hosting, analytics, infrastructure) strictly
                     as necessary to operate the Service.
@@ -345,19 +290,19 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">7. Cookies</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">7. Cookies</h2>
+                <p className="mt-3">
                   We use essential cookies to support website functionality and security.
                   Disabling cookies in your browser may reduce functionality.
                 </p>
               </section>
 
               <section>
-                <h2 className="t-h3">8. Your rights</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">8. Your rights</h2>
+                <p className="mt-3">
                   Depending on applicable law, you may request:
                 </p>
-                <ul className="mt-4 list-disc space-y-2 pl-6 t-body text-cream-100/80 marker:text-gold-500">
+                <ul className="mt-3 list-disc space-y-2 pl-6">
                   <li>access to your personal data;</li>
                   <li>correction or deletion;</li>
                   <li>withdrawal of consent;</li>
@@ -366,12 +311,12 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">9. Contact</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">9. Contact</h2>
+                <p className="mt-3">
                   For privacy-related requests, contact{" "}
                   <a
                     href={`mailto:${legal.publicEmail}`}
-                    className="whitespace-nowrap text-gold-500 hover:text-gold-400"
+                    className="whitespace-nowrap text-[#22c55e] hover:text-[#4ade80]"
                   >
                     {legal.publicEmail}
                   </a>
@@ -380,18 +325,19 @@ export default function PrivacyPage() {
               </section>
 
               <section>
-                <h2 className="t-h3">10. Changes to this policy</h2>
-                <p className="mt-4 t-body text-cream-100/80">
+                <h2 className="text-xl font-semibold">10. Changes to this policy</h2>
+                <p className="mt-3">
                   We may update this Privacy Policy from time to time. The latest version
                   will always be published on this page and the &quot;Last updated&quot;
                   date will be adjusted.
                 </p>
               </section>
 
-              <p className="t-micro text-muted-400">Last updated: {lastUpdatedEn}</p>
+              <p className="text-xs text-slate-400">Last updated: {lastUpdatedEn}</p>
             </div>
-          }
-        />
+            }
+          />
+        </div>
       </div>
     </main>
   );

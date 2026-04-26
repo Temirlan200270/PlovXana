@@ -47,7 +47,7 @@ export function getLegalInfo(): LegalInfo {
     country: readRequiredEnv("LEGAL_COUNTRY", "Казахстан"),
     addressLine: readRequiredEnv(
       "LEGAL_ADDRESS_LINE",
-      "Казахстан, г. Павлодар, ул. Естая, д. 81/1",
+      "Казахстан, г. Павлодар, ул. Естая, д. 81/1, офис 19",
     ),
     iinBin: readRequiredEnv("LEGAL_IIN_BIN", "830520350723"),
   };

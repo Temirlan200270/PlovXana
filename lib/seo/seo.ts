@@ -31,8 +31,8 @@ export function buildHomeMetadata(
   copy: TenantPublicConfig,
 ): Metadata {
   const base = getSiteUrl();
-  const title = `${copy.displayName} — Павлодар`;
-  const description = `${copy.contacts.halalNote} ${copy.contacts.hoursLine}. ${copy.contacts.addressLine}`;
+  const title = `${copy.displayName} — сервис обработки заказов для кафе`;
+  const description = `Сервис для кафе: приём заявок, подтверждения и статусы заказов. ${copy.contacts.hoursLine}. ${copy.contacts.addressLine}`;
   const url = `${base}/`;
 
   return {
@@ -63,8 +63,8 @@ export function buildMenuMetadata(
   copy: TenantPublicConfig,
 ): Metadata {
   const base = getSiteUrl();
-  const title = `Меню — ${copy.displayName}`;
-  const description = `Актуальное меню ${copy.displayName}. ${copy.contacts.hoursLine}. Доставка и бронь столов.`;
+  const title = `Цифровое меню (пример) · ${tenant.slug}`;
+  const description = `Пример цифрового меню для демонстрации возможностей сервиса ${copy.displayName}. ${copy.contacts.hoursLine}.`;
   const url = `${base}/${tenant.slug}/menu`;
 
   return {

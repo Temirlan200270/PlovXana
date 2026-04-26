@@ -18,8 +18,10 @@ export type TenantContacts = {
   /** Для ссылок tel: в формате E.164 без пробелов. */
   deliveryPhoneE164: string;
   instagramUrl: string;
-  kazansLine: string;
-  halalNote: string;
+  /** Доп. строка в футере (SLA, время ответа и т.п.). */
+  supportingContactLine: string;
+  /** Краткое описание услуг для SEO и доверия (в т.ч. Meta). */
+  serviceTagline: string;
 };
 
 export type TenantStat = {
@@ -42,9 +44,9 @@ export type TenantPublicConfig = {
   heroTitleLine1: string;
   heroTitleAccent: string;
   heroSub: string;
-  /** Главная кнопка Hero: бронирование. */
+  /** Главная кнопка Hero (например, связь / заявка). */
   primaryCtaLabel: string;
-  /** Вторая кнопка Hero: переход в меню. */
+  /** Вторая кнопка Hero (например, якорь на блок «как работает»). */
   secondaryCtaLabel: string;
 
   aboutEyebrow: string;

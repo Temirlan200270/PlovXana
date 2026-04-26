@@ -48,8 +48,8 @@ const copy = {
     deliveryPhoneDisplay: "",
     deliveryPhoneE164: "+77074007728",
     instagramUrl: "https://example.com",
-    kazansLine: "",
-    halalNote: "halal",
+    supportingContactLine: "",
+    serviceTagline: "WhatsApp solutions for restaurants.",
   },
   menuSnippet: [],
 };

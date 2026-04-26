@@ -15,7 +15,8 @@ const DEFAULT_SYNC = "http://localhost:4747";
  * MCP-сервер: `npm run mcp:agentation` — порт по умолчанию 4747.
  */
 export function AgentationDev(): ReactNode {
-  if (process.env.NODE_ENV !== "development") {
+  const isEnabled = process.env.NEXT_PUBLIC_ENABLE_AGENTATION === "1";
+  if (process.env.NODE_ENV !== "development" || !isEnabled) {
     return null;
   }
 

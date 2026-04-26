@@ -1,131 +1,90 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { cn } from "@/lib/utils/cn";
+import { usePathname, useSearchParams } from "next/navigation";
 import { BRAND_NAME } from "@/lib/branding";
-import { Button } from "@/components/ui/primitives/Button";
 
-const NAV_LABELS = {
-  menu: "Меню",
-  about: "О нас",
-  gallery: "Атмосфера",
-  reserve: "Бронь",
-  contact: "Контакты",
-  cta: "Забронировать стол",
-  burgerOpen: "Меню",
-  burgerClose: "Закрыть",
-} as const;
+type SiteLang = "ru" | "en";
 
-export function TopNav({ menuHref }: { menuHref: string }) {
-  const [open, setOpen] = useState(false);
+function labels(lang: SiteLang) {
+  if (lang === "en") {
+    return {
+      home: "Home",
+      features: "Features",
+      how: "How it works",
+      demo: "Use case",
+      about: "About",
+      contact: "Contact",
+    };
+  }
+  return {
+    home: "Главная",
+    features: "Возможности",
+    how: "Как работает",
+    demo: "Сценарий",
+    about: "О сервисе",
+    contact: "Контакты",
+  };
+}
+
+export function TopNav() {
+  const params = useSearchParams();
+  const pathname = usePathname();
+  const lang: SiteLang = params.get("lang") === "en" ? "en" : "ru";
+  const text = labels(lang);
+  const pagePath = pathname || "/";
+  const isHome = pagePath === "/";
+
+  const withLang = (targetPath: string) => `${targetPath}?lang=${lang}`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gold-500/30 bg-umber-950/80 backdrop-blur-md">
-      <div className="mx-auto flex h-20 max-w-[1280px] items-center justify-between px-6 md:px-16">
-        <Link
-          href="/"
-          className="font-sans text-xs font-medium tracking-[0.35em] uppercase text-cream-100/90 transition-colors duration-600 ease-heritage hover:text-gold-500"
-        >
+    <header className="sticky top-0 z-50 border-b border-slate-700/60 bg-[#0f172a]/95 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6 md:px-12">
+        <Link href={withLang("/")} className="text-xs font-semibold uppercase tracking-[0.18em] text-[#e2e8f0]">
           {BRAND_NAME}
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex">
-          <NavLink href={menuHref}>{NAV_LABELS.menu}</NavLink>
-          <NavLink href="#about">{NAV_LABELS.about}</NavLink>
-          <NavLink href="#gallery">{NAV_LABELS.gallery}</NavLink>
-          <NavLink href="#reserve">{NAV_LABELS.reserve}</NavLink>
-          <NavLink href="#contact">{NAV_LABELS.contact}</NavLink>
-        </nav>
+        {isHome ? (
+          <nav className="hidden items-center gap-6 md:flex">
+            <Link href={`/?lang=${lang}#features`} className="text-xs text-slate-300 hover:text-[#22c55e]">
+              {text.features}
+            </Link>
+            <Link href={`/?lang=${lang}#how`} className="text-xs text-slate-300 hover:text-[#22c55e]">
+              {text.how}
+            </Link>
+            <Link href={`/?lang=${lang}#demo`} className="text-xs text-slate-300 hover:text-[#22c55e]">
+              {text.demo}
+            </Link>
+            <Link href={`/?lang=${lang}#about`} className="text-xs text-slate-300 hover:text-[#22c55e]">
+              {text.about}
+            </Link>
+            <Link href={`/?lang=${lang}#contact`} className="text-xs text-slate-300 hover:text-[#22c55e]">
+              {text.contact}
+            </Link>
+          </nav>
+        ) : (
+          <nav className="hidden items-center gap-6 md:flex">
+            <Link href={withLang("/")} className="text-xs text-slate-300 hover:text-[#22c55e]">
+              {text.home}
+            </Link>
+          </nav>
+        )}
 
-        <div className="hidden items-center gap-4 md:flex">
-          <Button href="#reserve" variant="primary" size="sm">
-            {NAV_LABELS.cta}
-          </Button>
+        <div className="flex items-center gap-2">
+          <Link
+            href={`${pagePath}?lang=ru`}
+            className={`rounded-md px-3 py-1.5 text-xs font-semibold ${lang === "ru" ? "bg-[#22c55e] text-[#0f172a]" : "bg-[#1e293b] text-slate-300"}`}
+          >
+            RUS
+          </Link>
+          <Link
+            href={`${pagePath}?lang=en`}
+            className={`rounded-md px-3 py-1.5 text-xs font-semibold ${lang === "en" ? "bg-[#22c55e] text-[#0f172a]" : "bg-[#1e293b] text-slate-300"}`}
+          >
+            ENG
+          </Link>
         </div>
-
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-none ring-1 ring-gold-500/40 px-4 py-2 text-gold-500 md:hidden"
-          aria-label={open ? NAV_LABELS.burgerClose : NAV_LABELS.burgerOpen}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="font-sans text-xs font-medium tracking-[0.35em] uppercase">
-            {open ? NAV_LABELS.burgerClose : NAV_LABELS.burgerOpen}
-          </span>
-        </button>
       </div>
-
-      {open ? (
-        <div className="border-t border-gold-500/20 bg-umber-950/95 backdrop-blur-md md:hidden">
-          <div className="mx-auto max-w-[1280px] px-6 py-4">
-            <nav className="flex flex-col gap-3">
-              <MobileNavLink href={menuHref} onClick={() => setOpen(false)}>
-                {NAV_LABELS.menu}
-              </MobileNavLink>
-              <MobileNavLink href="#about" onClick={() => setOpen(false)}>
-                {NAV_LABELS.about}
-              </MobileNavLink>
-              <MobileNavLink href="#gallery" onClick={() => setOpen(false)}>
-                {NAV_LABELS.gallery}
-              </MobileNavLink>
-              <MobileNavLink href="#reserve" onClick={() => setOpen(false)}>
-                {NAV_LABELS.reserve}
-              </MobileNavLink>
-              <MobileNavLink href="#contact" onClick={() => setOpen(false)}>
-                {NAV_LABELS.contact}
-              </MobileNavLink>
-              <div className="pt-2">
-                <Button
-                  href="#reserve"
-                  variant="primary"
-                  size="md"
-                  className="w-full"
-                  onClick={() => setOpen(false)}
-                >
-                  {NAV_LABELS.cta}
-                </Button>
-              </div>
-            </nav>
-          </div>
-        </div>
-      ) : null}
     </header>
-  );
-}
-
-function NavLink({ href, children }: { href: string; children: string }) {
-  return (
-    <Link
-      href={href}
-      className="font-sans text-[10px] font-medium tracking-[0.25em] uppercase text-cream-100/75 transition-colors duration-600 ease-heritage hover:text-gold-500"
-    >
-      {children}
-    </Link>
-  );
-}
-
-function MobileNavLink({
-  href,
-  children,
-  onClick,
-}: {
-  href: string;
-  children: string;
-  onClick: () => void;
-}) {
-  return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className={cn(
-        "px-3 py-2 font-sans text-xs font-medium tracking-[0.3em] uppercase",
-        "text-cream-100/90 ring-1 ring-gold-500/20 bg-umber-900/40",
-        "transition-colors duration-600 ease-heritage hover:text-gold-500",
-      )}
-    >
-      {children}
-    </Link>
   );
 }

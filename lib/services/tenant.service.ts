@@ -14,50 +14,50 @@ function getPilotTenant(): TenantPublicConfig {
   return {
     slug: PILOT_SLUG,
     displayName: BRAND_NAME,
-    themeId: "kazakh-luxury",
+    themeId: "saas-dark",
 
-    heroEyebrow: "KZ · ПАВЛОДАР · 2026",
-    heroTitleLine1: "Вкус шёлкового пути,",
-    heroTitleAccent: "рождённый в огне.",
+    heroEyebrow: "KZ · СЕРВИС ОБРАБОТКИ ЗАКАЗОВ",
+    heroTitleLine1: "Сервис заказов",
+    heroTitleAccent: "для кафе",
     heroSub:
-      "Кочевое наследие Центральной Азии — на открытом пламени, в окружении старинной чеканки, шёлка и запаха дымящегося казана.",
-    primaryCtaLabel: "Забронировать у огня",
-    secondaryCtaLabel: "Смотреть меню",
+      "Приём заявок, подтверждения и статусы для кафе. Юридический оператор — ИП Абишев; позиционирование как сервис для бизнеса, а не как сайт кафе.",
+    primaryCtaLabel: "Обсудить подключение",
+    secondaryCtaLabel: "Как это работает",
 
-    aboutEyebrow: "01 — НАША ИСТОРИЯ",
-    aboutTitleLine1: "Огонь, который",
-    aboutTitleAccent: "помнит предков.",
+    aboutEyebrow: "01 — О КОМПАНИИ",
+    aboutTitleLine1: "Сервис для",
+    aboutTitleAccent: "общепита",
     aboutLead:
-      `${BRAND_NAME} — это не ресторан. Это дастархан, за которым встречаются поколения. Наши казаны — из меди, привезённой из Бухары. Рис — из Ферганской долины. А рецепт плова передаётся в семье шеф-повара уже четыре поколения.`,
+      `${BRAND_NAME} оказывает услуги по обработке заказов для кафе: приём заявки, подтверждение, статусы. Мы не продаём еду — помогаем заведению выстроить стабильный процесс обслуживания гостей.`,
     aboutClosingItalic:
-      "Каждое блюдо — это рассказ. Каждая специя — строчка в эпосе, звучащем под струны домбры.",
+      "Единый смысл сервиса: обработка заказов для кафе с быстрым и понятным рабочим процессом.",
     aboutStats: [
-      { value: "04", label: "ПОКОЛЕНИЯ" },
-      { value: "37", label: "БЛЮД В МЕНЮ" },
-      { value: "1924", label: "ГОД РЕЦЕПТА" },
+      { value: "OPS", label: "ORDER FLOW" },
+      { value: "B2B", label: "ДЛЯ КАФЕ" },
+      { value: "KZ", label: "КАЗАХСТАН" },
     ],
     aboutPhotoUrl: "/photo/atmosphere-warm.webp",
 
-    signatureEyebrow: "02 — ФИРМЕННЫЕ БЛЮДА",
-    signatureTitleLine1: "Вкус, высеченный",
-    signatureTitleAccent: "на кости времени.",
+    signatureEyebrow: "02 — СЕРВИС",
+    signatureTitleLine1: "Обработка",
+    signatureTitleAccent: "заказов для кафе",
 
-    galleryEyebrow: "03 — АТМОСФЕРА",
-    galleryTitleLine1: "Зал, где время",
-    galleryTitleAccent: "течёт медленнее.",
+    galleryEyebrow: "03 — ПРОЦЕСС",
+    galleryTitleLine1: "От запроса",
+    galleryTitleAccent: "к заявке",
     galleryTiles: [
-      { caption: "ОСНОВНОЙ ЗАЛ", variant: "default" },
-      { caption: "РУЧНАЯ КЕРАМИКА", variant: "tea" },
-      { caption: "ЖИВАЯ МУЗЫКА · ПТ–ВС", variant: "samsa" },
-      { caption: "ОТКРЫТЫЙ ТАНДЫР", variant: "dessert" },
+      { caption: "ЗАПРОС ГОСТЯ", variant: "default" },
+      { caption: "СБОР ЗАКАЗА", variant: "tea" },
+      { caption: "СТАТУСЫ", variant: "samsa" },
+      { caption: "ПЕРЕДАЧА НА КУХНЮ", variant: "dessert" },
     ],
 
-    reserveEyebrow: "04 — БРОНИРОВАНИЕ",
-    reserveTitleLine1: "Забронируйте стол",
-    reserveTitleAccent: "на вечер у огня.",
-    reserveSub: "Мы держим для вас место. Принесём чай, пока вы идёте.",
+    reserveEyebrow: "04 — СВЯЗЬ",
+    reserveTitleLine1: "Обсудим",
+    reserveTitleAccent: "внедрение",
+    reserveSub: "Расскажите о формате заведения и текущем процессе заказов — предложим архитектуру сценария.",
 
-    footerClosingItalic: "Приходите, пока казан горячий.",
+    footerClosingItalic: "Работаем с кафе по всему Казахстану.",
     footerCreditLine: "",
     footerInstagramLabel: "Instagram",
     contacts: {
@@ -66,11 +66,11 @@ function getPilotTenant(): TenantPublicConfig {
       //   "ТЦ Saida Plaza, пр. Нурсултана Назарбаева, 60/5, 1 этаж, Павлодар",
       // streetAddress:
       //   "проспект Нурсултана Назарбаева, 60/5, ТЦ Saida Plaza, 1 этаж",
-      addressLine: "Естая 83/1, Павлодар, почтовый индекс 140003",
-      streetAddress: "Естая 83/1, 140003",
+      addressLine: "Естая 81/1, офис 19, Павлодар, почтовый индекс 140003",
+      streetAddress: "Естая 81/1, офис 19, 140003",
       addressLocality: "Павлодар",
       publicEmail: publicEmail,
-      hoursLine: "Пн — Вс, 11:00–24:00",
+      hoursLine: "Пн — Пт, 09:00–18:00 (местное время)",
       // Было (откат телефонов):
       // bookingPhoneDisplay: "+7 777 400 77 28",
       // bookingPhoneE164: "+77774007728",
@@ -81,8 +81,9 @@ function getPilotTenant(): TenantPublicConfig {
       deliveryPhoneDisplay: "+7 701 100 05 70",
       deliveryPhoneE164: "+77011000570",
       instagramUrl: "https://www.instagram.com/plovxana.pvl/",
-      kazansLine: "Казаны: 12:00 • 16:00 • 19:00",
-      halalNote: "Заведение халяльное.",
+      supportingContactLine: "Ответ на запрос — в течение 1 рабочего дня.",
+      serviceTagline:
+        "Сервис приёма и обработки заказов для кафе (Казахстан).",
     },
   };
 }

@@ -218,7 +218,7 @@ export function ReserveSection({ copy }: { copy: TenantPublicConfig }) {
             <div>
               <div className="t-caps">ЧАСЫ</div>
               <p className="mt-4 t-body text-cream-100/80">{copy.contacts.hoursLine}</p>
-              <p className="mt-4 t-micro">{copy.contacts.kazansLine}</p>
+              <p className="mt-4 t-micro">{copy.contacts.supportingContactLine}</p>
             </div>
             <div>
               <div className="t-caps">КОНТАКТ</div>

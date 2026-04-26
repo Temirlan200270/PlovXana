@@ -8,9 +8,10 @@ import { atmosphere } from "@/config/atmosphere";
 import { isSupabaseConfigured } from "@/lib/supabase/server";
 import { getHomePublicCopy } from "@/lib/services/home-content";
 import { buildMenuMetadata } from "@/lib/seo/seo";
-import { buildMenuJsonLd, buildRestaurantJsonLd } from "@/lib/seo/schema";
+import { buildMenuJsonLd, buildOrganizationJsonLd } from "@/lib/seo/schema";
 import { getTenantConfig } from "@/lib/services/tenant.service";
 import { getTenantBySlug } from "@/lib/tenant/getTenant";
+import { getLegalInfo } from "@/lib/legal";
 import { getMenu } from "@/services/menu/getMenu";
 import type { Metadata } from "next";
 
@@ -84,15 +85,15 @@ export default async function MenuPage({ params }: PageProps) {
   };
 
   const a = atmosphere.menu;
-  const menuHref = `/${slug}/menu`;
   const orderHref = process.env.NEXT_PUBLIC_ORDER_URL?.trim() || null;
+  const legal = getLegalInfo();
 
   return (
     <>
-      <TopNav menuHref={menuHref} />
+      <TopNav />
 
       <main className="bg-umber-950">
-        <JsonLd data={buildRestaurantJsonLd(schemaTenant, copyForSchema)} />
+        <JsonLd data={buildOrganizationJsonLd(schemaTenant, copyForSchema)} />
         {buildMenuJsonLd(schemaTenant, menuResult.menu) ? (
           <JsonLd data={buildMenuJsonLd(schemaTenant, menuResult.menu)!} />
         ) : null}
@@ -117,7 +118,7 @@ export default async function MenuPage({ params }: PageProps) {
         </Section>
       </main>
 
-      <Footer copy={copyForSchema} />
+      <Footer copy={copyForSchema} legal={legal} />
     </>
   );
 }
