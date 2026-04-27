@@ -207,7 +207,7 @@ export default function PrivacyPage() {
                     <span className="whitespace-nowrap"> (BIN/IIN: {legal.iinBin})</span>
                   ) : null}
                   , address:{" "}
-                  <span className="whitespace-nowrap">{legal.addressLine}</span>.
+                  <span className="whitespace-nowrap">{legal.addressLineEn}</span>.
                 </p>
               </section>
 

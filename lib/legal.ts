@@ -10,6 +10,7 @@ export type LegalInfo = {
   city: string;
   country: string;
   addressLine: string;
+  addressLineEn: string;
   iinBin: string | null;
 };
 
@@ -38,7 +39,7 @@ export function getLegalInfo(): LegalInfo {
     operatorNameRu: readRequiredEnv("LEGAL_OPERATOR_NAME_RU", "ИП АБИШЕВ"),
     operatorNameEn: readRequiredEnv(
       "LEGAL_OPERATOR_NAME_EN",
-      "Individual Entrepreneur Abishev (Kazakhstan)",
+      "IE Abishev (Kazakhstan)",
     ),
     domain: readRequiredEnv("LEGAL_DOMAIN", "plovxanapvl.com"),
     publicEmail: readRequiredEnv("LEGAL_PUBLIC_EMAIL", "info@plovxanapvl.com"),
@@ -48,6 +49,10 @@ export function getLegalInfo(): LegalInfo {
     addressLine: readRequiredEnv(
       "LEGAL_ADDRESS_LINE",
       "140000, Казахстан, г. Павлодар, ул. Естая, дом 81/1, кв. 19",
+    ),
+    addressLineEn: readRequiredEnv(
+      "LEGAL_ADDRESS_LINE_EN",
+      "140000, Kazakhstan, Pavlodar, Estaya St., building 81/1, apt. 19",
     ),
     iinBin: readRequiredEnv("LEGAL_IIN_BIN", "830520350723"),
   };

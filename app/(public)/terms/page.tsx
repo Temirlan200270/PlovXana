@@ -185,7 +185,7 @@ export default function TermsPage() {
                       <span className="whitespace-nowrap"> (BIN/IIN: {legal.iinBin})</span>
                     ) : null}
                     , address:{" "}
-                    <span className="whitespace-nowrap">{legal.addressLine}</span>. These
+                    <span className="whitespace-nowrap">{legal.addressLineEn}</span>. These
                     Terms apply to the website, public pages, contact forms, and related
                     requests for cafe order-processing solutions.
                   </p>

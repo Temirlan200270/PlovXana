@@ -17,6 +17,9 @@ export function Footer({ copy, legal }: FooterProps) {
   const lang = params.get("lang") === "en" ? "en" : "ru";
   const email = copy.contacts.publicEmail?.trim() || legal.publicEmail;
   const iin = legal.iinBin?.trim();
+  const address = lang === "en" ? legal.addressLineEn : legal.addressLine;
+  const operatorLine =
+    lang === "en" ? `${legal.operatorNameEn} (${legal.operatorNameRu})` : legal.operatorNameRu;
   const labels =
     lang === "en"
       ? {
@@ -52,14 +55,14 @@ export function Footer({ copy, legal }: FooterProps) {
             <a href={`tel:${copy.contacts.bookingPhoneE164}`} className="block hover:text-[#22c55e]">
               {copy.contacts.bookingPhoneDisplay}
             </a>
-            <div className="pt-2 text-xs text-slate-200">{legal.operatorNameRu}</div>
+            <div className="pt-2 text-xs text-slate-200">{operatorLine}</div>
             {iin ? (
               <div className="text-xs text-slate-500">
                 {labels.iin}: {iin}
               </div>
             ) : null}
             <div className="text-xs text-slate-500">
-              {labels.address}: {legal.addressLine}
+              {labels.address}: {address}
             </div>
             <div className="pt-2 text-xs">
               <span className="mr-2 text-slate-500">{labels.docs}:</span>
