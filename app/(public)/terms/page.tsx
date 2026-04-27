@@ -6,7 +6,7 @@ import { LanguageTabs } from "@/components/legal/LanguageTabs";
 export const metadata: Metadata = {
   title: "Условия использования / Terms of Service",
   description:
-    "Условия использования сайта и сервиса ИП Абишев для обработки заказов в кафе.",
+    "Условия использования сайта и сервиса ИП АБИШЕВ для обработки заказов в кафе.",
 };
 
 export default function TermsPage() {

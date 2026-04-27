@@ -16,15 +16,20 @@ export function Footer({ copy, legal }: FooterProps) {
   const params = useSearchParams();
   const lang = params.get("lang") === "en" ? "en" : "ru";
   const email = copy.contacts.publicEmail?.trim() || legal.publicEmail;
+  const iin = legal.iinBin?.trim();
   const labels =
     lang === "en"
       ? {
           docs: "Documents",
+          iin: "IIN",
+          address: "Address",
           privacy: "Политика конфиденциальности / Privacy Policy",
           terms: "Условия использования / Terms of Service",
         }
       : {
           docs: "Документы",
+          iin: "ИИН",
+          address: "Адрес",
           privacy: "Политика конфиденциальности / Privacy Policy",
           terms: "Условия использования / Terms of Service",
         };
@@ -47,7 +52,15 @@ export function Footer({ copy, legal }: FooterProps) {
             <a href={`tel:${copy.contacts.bookingPhoneE164}`} className="block hover:text-[#22c55e]">
               {copy.contacts.bookingPhoneDisplay}
             </a>
-            <div className="text-xs text-slate-500">{legal.addressLine}</div>
+            <div className="pt-2 text-xs text-slate-200">{legal.operatorNameRu}</div>
+            {iin ? (
+              <div className="text-xs text-slate-500">
+                {labels.iin}: {iin}
+              </div>
+            ) : null}
+            <div className="text-xs text-slate-500">
+              {labels.address}: {legal.addressLine}
+            </div>
             <div className="pt-2 text-xs">
               <span className="mr-2 text-slate-500">{labels.docs}:</span>
               <Link href={`/privacy?lang=${lang}`} className="hover:text-[#22c55e]">

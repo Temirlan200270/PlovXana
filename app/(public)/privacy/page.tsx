@@ -5,7 +5,7 @@ import { LanguageTabs } from "@/components/legal/LanguageTabs";
 export const metadata: Metadata = {
   title: "Политика конфиденциальности / Privacy Policy",
   description:
-    "Политика конфиденциальности ИП Абишев для сайта и сервиса обработки заказов для кафе и ресторанов.",
+    "Политика конфиденциальности ИП АБИШЕВ для сайта и сервиса обработки заказов для кафе и ресторанов.",
 };
 
 export default function PrivacyPage() {

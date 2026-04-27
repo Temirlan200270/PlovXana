@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AgentationDev } from "@/components/dev/AgentationDev";
 import { BRAND_NAME } from "@/lib/branding";
+import { getLegalInfo } from "@/lib/legal";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -10,6 +11,8 @@ const fontSans = Inter({
   weight: ["400", "500", "600"],
 });
 
+const legal = getLegalInfo();
+
 export const metadata: Metadata = {
   // Базовый fallback. Страницы переопределяют tenant-aware metadata через generateMetadata.
   title: {
@@ -17,7 +20,7 @@ export const metadata: Metadata = {
     template: `%s · ${BRAND_NAME}`,
   },
   description:
-    "ИП Абишев: сервис приёма и обработки заказов для кафе в Казахстане.",
+    `${legal.operatorNameRu}: сервис приёма и обработки заказов для кафе в Казахстане.`,
 };
 
 export default function RootLayout({
